@@ -15,14 +15,17 @@ Pod::Spec.new do |s|
   s.author        = { "Larkin" => "yangchenlarkin@gmail.com" }
   s.platform      = :ios
   s.source        = { :git => "https://github.com/yangchenlarkin/MDTools.git", :tag => "#{s.version}" }
-  s.source_files  = "MDTools", "MDTools/**/*.{h,m}"
+  s.source_files  = "MDTools/**/*.{h,m}"
   s.framework     = "Foundation"
+
+  s.subspec 'MDListener' do |sl|
+    sl.name          = "MDListener"
+    sl.source_files  = "MDTools/MDListener/*.{h,m}"
+  end
+
+  s.subspec 'MDTask' do |st|
+    st.name         = "MDTask"
+    st.source_files = "MDTools/MDTask/*.{h,m}"
+  end
+
 end
-
-s.subspec "MDListener" do |sl|
-	sl.name          = "MDListener"
-  sl.source_files  = "MDTools/MDListener", "MDTools/MDListener/*.{h,m}"
-
-s.subspec "MDTask" do |st|
-  st.name         = "MDTask"
-  sl.source_files = "MDTools/MDTask", "MDTools/MDTask/*.{h,m}"
