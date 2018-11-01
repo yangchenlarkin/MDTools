@@ -157,19 +157,17 @@
 
 - (void)testSetGroup {
     XCTestExpectation *expectation = [self expectationWithDescription:@""];
-    NSArray *array = @[
-                   @"0",
-                   @"1",
-                   @"2",
-                   @"3",
-                   @"4",
-                   @"5",
-                   @"6",
-                   @"7",
-                   @"8",
-                   @"9",
-                   ];
-    NSSet *set = [NSSet setWithArray:array];
+    NSSet *set = [NSSet setWithObjects:
+                  @"0",
+                  @"1",
+                  @"2",
+                  @"3",
+                  @"4",
+                  @"5",
+                  @"6",
+                  @"7",
+                  @"8",
+                  @"9", nil];
     NSMutableSet *result = [NSMutableSet setWithCapacity:set.count];
     
     MDTaskGroup *tg = [set md_taskGroupWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, NSString * _Nonnull obj) {
@@ -191,23 +189,21 @@
 
 - (void)testSetList {
     XCTestExpectation *expectation = [self expectationWithDescription:@""];
-    NSArray *array = @[
-                       @"0",
-                       @"1",
-                       @"2",
-                       @"3",
-                       @"4",
-                       @"5",
-                       @"6",
-                       @"7",
-                       @"8",
-                       @"9",
-                       ];
-    NSSet *set = [NSSet setWithArray:array];
+    NSSet *set = [NSSet setWithObjects:
+                  @"0",
+                  @"1",
+                  @"2",
+                  @"3",
+                  @"4",
+                  @"5",
+                  @"6",
+                  @"7",
+                  @"8",
+                  @"9", nil];
     NSMutableSet *result = [NSMutableSet setWithCapacity:set.count];
     MDTaskList *tl = [set md_taskListWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, id  _Nonnull obj, NSUInteger idx) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [result addObject:[obj stringByAppendingString:@"hello"]];
+            [result addObject:[obj stringByAppendingString:[@(idx) stringValue]]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 finish(task, YES);
             });
