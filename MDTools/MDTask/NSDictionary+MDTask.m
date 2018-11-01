@@ -10,7 +10,7 @@
 
 @implementation NSDictionary (MDTask)
 
-- (MDTaskGroup *_Nullable)lt_taskGroupWithObjectTask:(MDictionaryKeyObjectTaskBlock _Nonnull)objectTask {
+- (MDTaskGroup *_Nullable)md_taskGroupWithObjectTask:(MDictionaryKeyObjectTaskBlock _Nonnull)objectTask {
     MDTaskGroup *taskGroup = [MDTaskGroup taskGroup];
     [self enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [taskGroup addTaskBlock:^(MDTask *task, MDTaskFinish finish) {
@@ -20,7 +20,7 @@
     return taskGroup;
 }
 
-- (MDTaskList *_Nonnull)lt_taskListWithObjectTask:(MDictionaryIdxKeyObjectTaskBlock _Nonnull)objectTask {
+- (MDTaskList *_Nonnull)md_taskListWithObjectTask:(MDictionaryIdxKeyObjectTaskBlock _Nonnull)objectTask {
     NSArray *allKeys = self.allKeys;
     MDTaskList *taskList = [MDTaskList taskList];
     for (NSUInteger idx = 0; idx < self.count; idx++) {

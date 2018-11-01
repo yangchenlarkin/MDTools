@@ -11,7 +11,7 @@
 @implementation NSSet (MDTask)
 
 
-- (MDTaskGroup *_Nullable)lt_taskGroupWithObjectTask:(MSetObjectTaskBlock _Nonnull)objectTask {
+- (MDTaskGroup *_Nullable)md_taskGroupWithObjectTask:(MSetObjectTaskBlock _Nonnull)objectTask {
     MDTaskGroup *taskGroup = [MDTaskGroup taskGroup];
     [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
         [taskGroup addTaskBlock:^(MDTask *task, MDTaskFinish finish) {
@@ -21,7 +21,7 @@
     return taskGroup;
 }
 
-- (MDTaskList *_Nonnull)lt_taskListWithObjectTask:(MSetIdxObjectTaskBlock _Nonnull)objectTask {
+- (MDTaskList *_Nonnull)md_taskListWithObjectTask:(MSetIdxObjectTaskBlock _Nonnull)objectTask {
     NSArray *allObjects = self.allObjects;
     
     MDTaskList *taskList = [MDTaskList taskList];

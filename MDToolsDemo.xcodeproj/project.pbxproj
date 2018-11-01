@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C79C87B39F16CB2626F1E0B /* libPods-MDToolsDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 600FAA766119AC348833F81B /* libPods-MDToolsDemo.a */; };
+		B812B9BE218AAA5300D3E6F8 /* ProtocolImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = B812B9BD218AAA5300D3E6F8 /* ProtocolImplementation.m */; };
 		D0DBC0DD1F8B80CF0035BFA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DC1F8B80CF0035BFA0 /* AppDelegate.m */; };
 		D0DBC0E01F8B80CF0035BFA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DF1F8B80CF0035BFA0 /* ViewController.m */; };
 		D0DBC0E31F8B80CF0035BFA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC0E11F8B80CF0035BFA0 /* Main.storyboard */; };
@@ -23,6 +25,7 @@
 		D0DBC11B1F8B80FB0035BFA0 /* NSArray+MDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC1141F8B80FB0035BFA0 /* NSArray+MDTask.m */; };
 		D0DBC11C1F8B80FB0035BFA0 /* NSDictionary+MDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC1161F8B80FB0035BFA0 /* NSDictionary+MDTask.m */; };
 		D0DBC11D1F8B80FB0035BFA0 /* NSSet+MDTask.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC1181F8B80FB0035BFA0 /* NSSet+MDTask.m */; };
+		D994AB8FD85877EA0715EB2C /* libPods-MDToolsDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65ED4E7512A14E6A699B5E1B /* libPods-MDToolsDemoTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		44991912715605CB695313CF /* Pods-MDToolsDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MDToolsDemo/Pods-MDToolsDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		4F4AE40E81874B75988A6BA1 /* Pods-MDToolsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-MDToolsDemo/Pods-MDToolsDemo.release.xcconfig"; sourceTree = "<group>"; };
+		600FAA766119AC348833F81B /* libPods-MDToolsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MDToolsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		65ED4E7512A14E6A699B5E1B /* libPods-MDToolsDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MDToolsDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B32C59249B3C72A2A5DFD4EA /* Pods-MDToolsDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MDToolsDemoTests/Pods-MDToolsDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		B812B9BC218AAA5300D3E6F8 /* ProtocolImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolImplementation.h; sourceTree = "<group>"; };
+		B812B9BD218AAA5300D3E6F8 /* ProtocolImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolImplementation.m; sourceTree = "<group>"; };
+		B87A6F1D77A155643854C7B8 /* Pods-MDToolsDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MDToolsDemoTests/Pods-MDToolsDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0DBC0D81F8B80CF0035BFA0 /* MDToolsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDToolsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DBC0DB1F8B80CF0035BFA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D0DBC0DC1F8B80CF0035BFA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -71,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C79C87B39F16CB2626F1E0B /* libPods-MDToolsDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,12 +90,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D994AB8FD85877EA0715EB2C /* libPods-MDToolsDemoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		017D330E75427F4C338AC157 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				44991912715605CB695313CF /* Pods-MDToolsDemo.debug.xcconfig */,
+				4F4AE40E81874B75988A6BA1 /* Pods-MDToolsDemo.release.xcconfig */,
+				B87A6F1D77A155643854C7B8 /* Pods-MDToolsDemoTests.debug.xcconfig */,
+				B32C59249B3C72A2A5DFD4EA /* Pods-MDToolsDemoTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B84E041E218AAC730092FD1C /* MDProtocolImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				B812B9BC218AAA5300D3E6F8 /* ProtocolImplementation.h */,
+				B812B9BD218AAA5300D3E6F8 /* ProtocolImplementation.m */,
+			);
+			path = MDProtocolImplementation;
+			sourceTree = "<group>";
+		};
+		BBDD56C7655F5B536BE00A6F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				600FAA766119AC348833F81B /* libPods-MDToolsDemo.a */,
+				65ED4E7512A14E6A699B5E1B /* libPods-MDToolsDemoTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D0DBC0CF1F8B80CF0035BFA0 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +133,8 @@
 				D0DBC0DA1F8B80CF0035BFA0 /* MDToolsDemo */,
 				D0DBC0F31F8B80CF0035BFA0 /* MDToolsDemoTests */,
 				D0DBC0D91F8B80CF0035BFA0 /* Products */,
+				017D330E75427F4C338AC157 /* Pods */,
+				BBDD56C7655F5B536BE00A6F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -151,6 +195,7 @@
 		D0DBC10B1F8B80FB0035BFA0 /* MDTools */ = {
 			isa = PBXGroup;
 			children = (
+				B84E041E218AAC730092FD1C /* MDProtocolImplementation */,
 				D0DBC10C1F8B80FB0035BFA0 /* MDListener */,
 				D0DBC10F1F8B80FB0035BFA0 /* MDTask */,
 			);
@@ -189,6 +234,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0DBC0F91F8B80CF0035BFA0 /* Build configuration list for PBXNativeTarget "MDToolsDemo" */;
 			buildPhases = (
+				F12C6EEAB28EDC565C22A1A2 /* [CP] Check Pods Manifest.lock */,
 				D0DBC0D41F8B80CF0035BFA0 /* Sources */,
 				D0DBC0D51F8B80CF0035BFA0 /* Frameworks */,
 				D0DBC0D61F8B80CF0035BFA0 /* Resources */,
@@ -206,6 +252,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0DBC0FC1F8B80CF0035BFA0 /* Build configuration list for PBXNativeTarget "MDToolsDemoTests" */;
 			buildPhases = (
+				CC7A2DD118DCDAF962BC95F6 /* [CP] Check Pods Manifest.lock */,
 				D0DBC0EC1F8B80CF0035BFA0 /* Sources */,
 				D0DBC0ED1F8B80CF0035BFA0 /* Frameworks */,
 				D0DBC0EE1F8B80CF0035BFA0 /* Resources */,
@@ -279,11 +326,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CC7A2DD118DCDAF962BC95F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MDToolsDemoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F12C6EEAB28EDC565C22A1A2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MDToolsDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D0DBC0D41F8B80CF0035BFA0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B812B9BE218AAA5300D3E6F8 /* ProtocolImplementation.m in Sources */,
 				D0DBC0E01F8B80CF0035BFA0 /* ViewController.m in Sources */,
 				D0DBC0EB1F8B80CF0035BFA0 /* main.m in Sources */,
 				D0DBC0DD1F8B80CF0035BFA0 /* AppDelegate.m in Sources */,
@@ -443,10 +530,11 @@
 		};
 		D0DBC0FA1F8B80CF0035BFA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44991912715605CB695313CF /* Pods-MDToolsDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7649935W39;
+				DEVELOPMENT_TEAM = R6742XH2VZ;
 				INFOPLIST_FILE = MDToolsDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Larkin.MDToolsDemo;
@@ -457,10 +545,11 @@
 		};
 		D0DBC0FB1F8B80CF0035BFA0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F4AE40E81874B75988A6BA1 /* Pods-MDToolsDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7649935W39;
+				DEVELOPMENT_TEAM = R6742XH2VZ;
 				INFOPLIST_FILE = MDToolsDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Larkin.MDToolsDemo;
@@ -471,6 +560,7 @@
 		};
 		D0DBC0FD1F8B80CF0035BFA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B87A6F1D77A155643854C7B8 /* Pods-MDToolsDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -486,6 +576,7 @@
 		};
 		D0DBC0FE1F8B80CF0035BFA0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B32C59249B3C72A2A5DFD4EA /* Pods-MDToolsDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;

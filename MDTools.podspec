@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name          = "MDTools"
-  s.version       = "0.0.2"
+  s.version       = "0.0.3"
   s.summary       = "Tools for Objcetive-C."
   s.homepage      = "https://github.com/yangchenlarkin/MDTools"
   s.license       = "MIT"
@@ -26,6 +26,11 @@ Pod::Spec.new do |s|
   s.subspec 'MDTask' do |st|
     st.name         = "MDTask"
     st.source_files = "MDTools/MDTask/*.{h,m}"
+  end
+
+  s.subspec 'MDProtocolImplementation' do |sp|
+  	sp.name         = "MDProtocolImplementation"
+  	sp.source_files = "MDTools/MDProtocolImplementation/*.{h,m}"
   end
 
 end

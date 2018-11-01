@@ -35,7 +35,7 @@ typedef void (^MDTaskFailBlock)(MDTask *task, NSUInteger tryCount, void (^retry)
 @property (nonatomic, readonly) NSUInteger count;
 
 + (MDTaskGroup *)taskGroup;
-+ (MDTaskGroup *)taskGroupWithTasks:(NSSet<__kindof MDTask *> *)tasks;
++ (MDTaskGroup *)taskGroupWithTasks:(MDTask *)task, ...;
 - (BOOL)addTaskBlock:(MDTaskBlock)taskBlock;
 - (BOOL)addTask:(__kindof MDTask *)task;
 /*
@@ -53,7 +53,7 @@ typedef void (^MDTaskFailBlock)(MDTask *task, NSUInteger tryCount, void (^retry)
 @property (nonatomic, readonly) NSUInteger count;
 
 + (MDTaskList *)taskList;
-+ (MDTaskList *)taskListWithTasks:(NSArray<__kindof MDTask *> *)tasks;
++ (MDTaskList *)taskListWithTasks:(MDTask *)task, ...;
 - (BOOL)addTaskBlock:(MDTaskBlock)taskBlock;
 - (BOOL)addTask:(__kindof MDTask *)task;
 /*

@@ -132,9 +132,16 @@
     return [[MDTaskGroup alloc] init];
 }
 
-+ (MDTaskGroup *)taskGroupWithTasks:(NSSet<__kindof MDTask *> *)tasks {
++ (MDTaskGroup *)taskGroupWithTasks:(MDTask *)task, ... {
     MDTaskGroup *t = [MDTaskGroup taskGroup];
-    t.tasks = [tasks mutableCopy];
+    va_list ap;
+    va_start(ap, task);
+    t.tasks = [NSMutableSet setWithObject:task];
+    MDTask *ts = nil;
+    while ((ts = va_arg(ap, MDTask *))) {
+        [t.tasks addObject:ts];
+    }
+    va_end(ap);
     return t;
 }
 
@@ -257,9 +264,16 @@
     return [[MDTaskList alloc] init];
 }
 
-+ (MDTaskList *)taskListWithTasks:(NSArray<__kindof MDTask *> *)tasks {
++ (MDTaskList *)taskListWithTasks:(MDTask *)task, ... {
     MDTaskList *t = [MDTaskList taskList];
-    t.tasks = [tasks mutableCopy];
+    va_list ap;
+    va_start(ap, task);
+    t.tasks = [NSMutableArray arrayWithObject:task];
+    MDTask *ts = nil;
+    while ((ts = va_arg(ap, MDTask *))) {
+        [t.tasks addObject:ts];
+    }
+    va_end(ap);
     return t;
 }
 
