@@ -10,7 +10,7 @@ target 'MDToolsDemo' do
   target 'MDToolsDemoTests' do
     inherit! :search_paths
     # Pods for testing
-#    pod 'MDTools'
+    pod 'ReactiveObjC'
   end
 
 end
