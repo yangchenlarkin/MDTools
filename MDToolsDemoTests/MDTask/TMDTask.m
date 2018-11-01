@@ -109,7 +109,7 @@
     [tl addTask:self.task1];
     [tl addTask:self.task2];
     
-    MDTaskGroup *tg = [MDTaskGroup taskGroupWithTasks:[NSSet setWithObjects:tl, self.task3, nil]];
+    MDTaskGroup *tg = [MDTaskGroup taskGroupWithTasks:tl, self.task3, nil];
     
     [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
         [expectation fulfill];
@@ -124,7 +124,7 @@
     [tg addTask:self.task1];
     [tg addTask:self.task2];
     
-    MDTaskList *tl = [MDTaskList taskListWithTasks:@[tg, self.task3]];
+    MDTaskList *tl = [MDTaskList taskListWithTasks:tg, self.task3, nil];
     [tl runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
         [expectation fulfill];
     }];
