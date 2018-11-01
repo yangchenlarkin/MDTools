@@ -13,7 +13,7 @@ typedef void(^MArrayObjectTaskBlock)(MDTask * _Nonnull task, MDTaskFinish _Nonnu
 
 @interface NSArray (MDTask)
 
-- (MDTaskGroup *_Nullable)lt_taskGroupWithObjectTask:(MArrayObjectTaskBlock _Nonnull)objectTask;
-- (MDTaskList *_Nonnull)lt_taskListWithObjectTask:(MArrayObjectTaskBlock _Nonnull)objectTask;
+- (MDTaskGroup *_Nullable)md_taskGroupWithObjectTask:(MArrayObjectTaskBlock _Nonnull)objectTask;
+- (MDTaskList *_Nonnull)md_taskListWithObjectTask:(MArrayObjectTaskBlock _Nonnull)objectTask;
 
 @end
