@@ -8,12 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C79C87B39F16CB2626F1E0B /* libPods-MDToolsDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 600FAA766119AC348833F81B /* libPods-MDToolsDemo.a */; };
-		B812B9BA218AA51600D3E6F8 /* UIViewController+ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B812B9B6218AA51600D3E6F8 /* UIViewController+ModuleManager.m */; };
-		B812B9BB218AA51600D3E6F8 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B812B9B8218AA51600D3E6F8 /* ModuleManager.m */; };
 		B812B9BE218AAA5300D3E6F8 /* ProtocolImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = B812B9BD218AAA5300D3E6F8 /* ProtocolImplementation.m */; };
-		B84E041B218AAB570092FD1C /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = B84E0415218AAB560092FD1C /* Aspects.m */; };
-		B84E041C218AAB570092FD1C /* NSObject+Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = B84E0418218AAB570092FD1C /* NSObject+Aspects.m */; };
-		B84E041D218AAB570092FD1C /* NSInvocation+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = B84E041A218AAB570092FD1C /* NSInvocation+Block.m */; };
 		D0DBC0DD1F8B80CF0035BFA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DC1F8B80CF0035BFA0 /* AppDelegate.m */; };
 		D0DBC0E01F8B80CF0035BFA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DF1F8B80CF0035BFA0 /* ViewController.m */; };
 		D0DBC0E31F8B80CF0035BFA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC0E11F8B80CF0035BFA0 /* Main.storyboard */; };
@@ -49,18 +44,8 @@
 		600FAA766119AC348833F81B /* libPods-MDToolsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MDToolsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65ED4E7512A14E6A699B5E1B /* libPods-MDToolsDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MDToolsDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32C59249B3C72A2A5DFD4EA /* Pods-MDToolsDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MDToolsDemoTests/Pods-MDToolsDemoTests.release.xcconfig"; sourceTree = "<group>"; };
-		B812B9B6218AA51600D3E6F8 /* UIViewController+ModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ModuleManager.m"; sourceTree = "<group>"; };
-		B812B9B7218AA51600D3E6F8 /* UIViewController+ModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ModuleManager.h"; sourceTree = "<group>"; };
-		B812B9B8218AA51600D3E6F8 /* ModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleManager.m; sourceTree = "<group>"; };
-		B812B9B9218AA51600D3E6F8 /* ModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleManager.h; sourceTree = "<group>"; };
 		B812B9BC218AAA5300D3E6F8 /* ProtocolImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolImplementation.h; sourceTree = "<group>"; };
 		B812B9BD218AAA5300D3E6F8 /* ProtocolImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolImplementation.m; sourceTree = "<group>"; };
-		B84E0415218AAB560092FD1C /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
-		B84E0416218AAB560092FD1C /* NSInvocation+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+Block.h"; sourceTree = "<group>"; };
-		B84E0417218AAB560092FD1C /* NSObject+Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Aspects.h"; sourceTree = "<group>"; };
-		B84E0418218AAB570092FD1C /* NSObject+Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Aspects.m"; sourceTree = "<group>"; };
-		B84E0419218AAB570092FD1C /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
-		B84E041A218AAB570092FD1C /* NSInvocation+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+Block.m"; sourceTree = "<group>"; };
 		B87A6F1D77A155643854C7B8 /* Pods-MDToolsDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MDToolsDemoTests/Pods-MDToolsDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0DBC0D81F8B80CF0035BFA0 /* MDToolsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDToolsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DBC0DB1F8B80CF0035BFA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -121,31 +106,6 @@
 				B32C59249B3C72A2A5DFD4EA /* Pods-MDToolsDemoTests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		B812B9B5218AA4FE00D3E6F8 /* MDModuleManager */ = {
-			isa = PBXGroup;
-			children = (
-				B812B9B9218AA51600D3E6F8 /* ModuleManager.h */,
-				B812B9B8218AA51600D3E6F8 /* ModuleManager.m */,
-				B812B9B7218AA51600D3E6F8 /* UIViewController+ModuleManager.h */,
-				B812B9B6218AA51600D3E6F8 /* UIViewController+ModuleManager.m */,
-				B84E0414218AAB3C0092FD1C /* Aspects */,
-			);
-			path = MDModuleManager;
-			sourceTree = "<group>";
-		};
-		B84E0414218AAB3C0092FD1C /* Aspects */ = {
-			isa = PBXGroup;
-			children = (
-				B84E0419218AAB570092FD1C /* Aspects.h */,
-				B84E0415218AAB560092FD1C /* Aspects.m */,
-				B84E0416218AAB560092FD1C /* NSInvocation+Block.h */,
-				B84E041A218AAB570092FD1C /* NSInvocation+Block.m */,
-				B84E0417218AAB560092FD1C /* NSObject+Aspects.h */,
-				B84E0418218AAB570092FD1C /* NSObject+Aspects.m */,
-			);
-			path = Aspects;
 			sourceTree = "<group>";
 		};
 		B84E041E218AAC730092FD1C /* MDProtocolImplementation */ = {
@@ -236,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				B84E041E218AAC730092FD1C /* MDProtocolImplementation */,
-				B812B9B5218AA4FE00D3E6F8 /* MDModuleManager */,
 				D0DBC10C1F8B80FB0035BFA0 /* MDListener */,
 				D0DBC10F1F8B80FB0035BFA0 /* MDTask */,
 			);
@@ -411,15 +370,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B812B9BA218AA51600D3E6F8 /* UIViewController+ModuleManager.m in Sources */,
-				B84E041B218AAB570092FD1C /* Aspects.m in Sources */,
 				B812B9BE218AAA5300D3E6F8 /* ProtocolImplementation.m in Sources */,
-				B84E041C218AAB570092FD1C /* NSObject+Aspects.m in Sources */,
 				D0DBC0E01F8B80CF0035BFA0 /* ViewController.m in Sources */,
-				B84E041D218AAB570092FD1C /* NSInvocation+Block.m in Sources */,
 				D0DBC0EB1F8B80CF0035BFA0 /* main.m in Sources */,
 				D0DBC0DD1F8B80CF0035BFA0 /* AppDelegate.m in Sources */,
-				B812B9BB218AA51600D3E6F8 /* ModuleManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
