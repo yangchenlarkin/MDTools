@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.author        = { "Larkin" => "yangchenlarkin@gmail.com" }
   s.platform      = :ios
   s.source        = { :git => "https://github.com/yangchenlarkin/MDTools.git", :tag => "#{s.version}" }
-  s.source_files  = "MDTools/*.{h,m}"
+  s.source_files  = "MDTools/**/*.{h,m}"
   s.framework     = "Foundation"
 
   s.subspec 'MDListener' do |sl|
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'MDProtocolImplementation' do |sp|
-  	sp.name 		= "MDProtocolImplementation"
+  	sp.name         = "MDProtocolImplementation"
   	sp.source_files = "MDTools/MDProtocolImplementation/*.{h,m}"
   end
 
