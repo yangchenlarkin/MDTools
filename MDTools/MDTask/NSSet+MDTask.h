@@ -14,8 +14,8 @@ typedef void(^MSetIdxObjectTaskBlock)(MDTask * _Nonnull task, MDTaskFinish _Nonn
 
 @interface NSSet (MDTask)
 
-- (MDTaskGroup *_Nullable)lt_taskGroupWithObjectTask:(MSetObjectTaskBlock _Nonnull)objectTask;
+- (MDTaskGroup *_Nullable)md_taskGroupWithObjectTask:(MSetObjectTaskBlock _Nonnull)objectTask;
 
-- (MDTaskList *_Nonnull)lt_taskListWithObjectTask:(MSetIdxObjectTaskBlock _Nonnull)objectTask; //as the same order as allObjects
+- (MDTaskList *_Nonnull)md_taskListWithObjectTask:(MSetIdxObjectTaskBlock _Nonnull)objectTask; //as the same order as allObjects
 
 @end

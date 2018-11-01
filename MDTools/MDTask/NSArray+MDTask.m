@@ -10,7 +10,7 @@
 
 @implementation NSArray (MDTask)
 
-- (MDTaskGroup *)lt_taskGroupWithObjectTask:(MArrayObjectTaskBlock)objectTask {
+- (MDTaskGroup *)md_taskGroupWithObjectTask:(MArrayObjectTaskBlock)objectTask {
     MDTaskGroup *taskGroup = [MDTaskGroup taskGroup];
     [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [taskGroup addTaskBlock:^(MDTask *task, MDTaskFinish finish) {
@@ -20,7 +20,7 @@
     return taskGroup;
 }
 
-- (MDTaskList *)lt_taskListWithObjectTask:(MArrayObjectTaskBlock)objectTask {
+- (MDTaskList *)md_taskListWithObjectTask:(MArrayObjectTaskBlock)objectTask {
     MDTaskList *taskList = [MDTaskList taskList];
     for (NSUInteger idx = 0; idx < self.count; idx++) {
         [taskList addTaskBlock:^(MDTask *task, MDTaskFinish finish) {

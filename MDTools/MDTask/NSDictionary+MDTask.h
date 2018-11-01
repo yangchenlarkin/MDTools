@@ -14,7 +14,7 @@ typedef void(^MDictionaryIdxKeyObjectTaskBlock)(MDTask * _Nonnull task, MDTaskFi
 
 @interface NSDictionary (MDTask)
 
-- (MDTaskGroup *_Nullable)lt_taskGroupWithObjectTask:(MDictionaryKeyObjectTaskBlock _Nonnull)objectTask;
-- (MDTaskList *_Nonnull)lt_taskListWithObjectTask:(MDictionaryIdxKeyObjectTaskBlock _Nonnull)objectTask; //as the same order as allKeys
+- (MDTaskGroup *_Nullable)md_taskGroupWithObjectTask:(MDictionaryKeyObjectTaskBlock _Nonnull)objectTask;
+- (MDTaskList *_Nonnull)md_taskListWithObjectTask:(MDictionaryIdxKeyObjectTaskBlock _Nonnull)objectTask; //as the same order as allKeys
 
 @end
