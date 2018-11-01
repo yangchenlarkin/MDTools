@@ -33,9 +33,9 @@ Pod::Spec.new do |s|
   	sp.source_files = "MDTools/MDProtocolImplementation/*.{h,m}"
   end
 
-  s.subspec 'MDModuleManager' do |sm|
-  	sm.name         = "MDModuleManager"
-  	sm.source_files = "MDTools/MDModuleManager/*.{h,m}"
-  end
+  # s.subspec 'MDModuleManager' do |sm|
+  # 	sm.name         = "MDModuleManager"
+  # 	sm.source_files = "MDTools/MDModuleManager/*.{h,m}"
+  # end
 
 end
