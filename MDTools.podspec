@@ -28,4 +28,9 @@ Pod::Spec.new do |s|
     st.source_files = "MDTools/MDTask/*.{h,m}"
   end
 
+  s.subspec 'MDProtocolImplementation' do |sp|
+  	sp.name 		= "MDProtocolImplementation"
+  	sp.source_files = "MDTools/MDProtocolImplementation/*.{h,m}"
+  end
+
 end
