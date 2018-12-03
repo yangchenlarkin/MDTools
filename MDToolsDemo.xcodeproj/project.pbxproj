@@ -13,6 +13,8 @@
 		D056E2A821B525080088F6BB /* NSObject+Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2A221B525070088F6BB /* NSObject+Aspects.m */; };
 		D056E2AB21B526200088F6BB /* TMDProtocolImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2AA21B526200088F6BB /* TMDProtocolImplementation.m */; };
 		D056E2AE21B526450088F6BB /* TMDProtocolImplementation_protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2AD21B526450088F6BB /* TMDProtocolImplementation_protocol.m */; };
+		D056E2B221B528F70088F6BB /* TMDAspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2B121B528F70088F6BB /* TMDAspects.m */; };
+		D056E2B521B529B00088F6BB /* TMDAspects_testObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2B421B529B00088F6BB /* TMDAspects_testObject.m */; };
 		D0DBC0DD1F8B80CF0035BFA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DC1F8B80CF0035BFA0 /* AppDelegate.m */; };
 		D0DBC0E01F8B80CF0035BFA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DF1F8B80CF0035BFA0 /* ViewController.m */; };
 		D0DBC0E31F8B80CF0035BFA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC0E11F8B80CF0035BFA0 /* Main.storyboard */; };
@@ -53,6 +55,9 @@
 		D056E2AC21B526450088F6BB /* TMDProtocolImplementation_protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMDProtocolImplementation_protocol.h; sourceTree = "<group>"; };
 		D056E2AD21B526450088F6BB /* TMDProtocolImplementation_protocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMDProtocolImplementation_protocol.m; sourceTree = "<group>"; };
 		D056E2AF21B5268C0088F6BB /* MDProtocolImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDProtocolImplementation.h; sourceTree = "<group>"; };
+		D056E2B121B528F70088F6BB /* TMDAspects.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMDAspects.m; sourceTree = "<group>"; };
+		D056E2B321B529B00088F6BB /* TMDAspects_testObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMDAspects_testObject.h; sourceTree = "<group>"; };
+		D056E2B421B529B00088F6BB /* TMDAspects_testObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMDAspects_testObject.m; sourceTree = "<group>"; };
 		D0DBC0D81F8B80CF0035BFA0 /* MDToolsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDToolsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DBC0DB1F8B80CF0035BFA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D0DBC0DC1F8B80CF0035BFA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -140,6 +145,16 @@
 			path = MDProtocolImplementation;
 			sourceTree = "<group>";
 		};
+		D056E2B021B528E10088F6BB /* MDAspects */ = {
+			isa = PBXGroup;
+			children = (
+				D056E2B121B528F70088F6BB /* TMDAspects.m */,
+				D056E2B321B529B00088F6BB /* TMDAspects_testObject.h */,
+				D056E2B421B529B00088F6BB /* TMDAspects_testObject.m */,
+			);
+			path = MDAspects;
+			sourceTree = "<group>";
+		};
 		D0DBC0CF1F8B80CF0035BFA0 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +194,7 @@
 		D0DBC0F31F8B80CF0035BFA0 /* MDToolsDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				D056E2B021B528E10088F6BB /* MDAspects */,
 				D056E2A921B525E50088F6BB /* MDProtocolImplementation */,
 				D0DBC1041F8B80F40035BFA0 /* MDListener */,
 				D0DBC0FF1F8B80F40035BFA0 /* MDTask */,
@@ -368,6 +384,8 @@
 				D0DBC1081F8B80F40035BFA0 /* TMDTaskRetry.m in Sources */,
 				D0DBC1071F8B80F40035BFA0 /* TMDTaskCancel.m in Sources */,
 				D0DBC1191F8B80FB0035BFA0 /* MDListener.m in Sources */,
+				D056E2B521B529B00088F6BB /* TMDAspects_testObject.m in Sources */,
+				D056E2B221B528F70088F6BB /* TMDAspects.m in Sources */,
 				D0DBC11C1F8B80FB0035BFA0 /* NSDictionary+MDTask.m in Sources */,
 				D0DBC1061F8B80F40035BFA0 /* TMDTask.m in Sources */,
 			);
