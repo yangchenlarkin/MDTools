@@ -1,12 +1,12 @@
 //
-//  ProtocolImplementation.m
-//  MVVMsDemo
+//  MDProtocolImplementation.m
+//  MDTools
 //
 //  Created by Larkin Yang on 2017/7/12.
 //  Copyright © 2017年 BTCC. All rights reserved.
 //
 
-#import "ProtocolImplementation.h"
+#import "MDProtocolImplementation.h"
 #import <objc/runtime.h>
 
 void _append_default_implement_method_to_class_implementation_class(Class class) {

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B812B9BE218AAA5300D3E6F8 /* ProtocolImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = B812B9BD218AAA5300D3E6F8 /* ProtocolImplementation.m */; };
+		B812B9BE218AAA5300D3E6F8 /* MDProtocolImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = B812B9BD218AAA5300D3E6F8 /* MDProtocolImplementation.m */; };
 		D0DBC0DD1F8B80CF0035BFA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DC1F8B80CF0035BFA0 /* AppDelegate.m */; };
 		D0DBC0E01F8B80CF0035BFA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DF1F8B80CF0035BFA0 /* ViewController.m */; };
 		D0DBC0E31F8B80CF0035BFA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC0E11F8B80CF0035BFA0 /* Main.storyboard */; };
@@ -37,8 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B812B9BC218AAA5300D3E6F8 /* ProtocolImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolImplementation.h; sourceTree = "<group>"; };
-		B812B9BD218AAA5300D3E6F8 /* ProtocolImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolImplementation.m; sourceTree = "<group>"; };
+		B812B9BC218AAA5300D3E6F8 /* MDProtocolImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDProtocolImplementation.h; sourceTree = "<group>"; };
+		B812B9BD218AAA5300D3E6F8 /* MDProtocolImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDProtocolImplementation.m; sourceTree = "<group>"; };
 		D0DBC0D81F8B80CF0035BFA0 /* MDToolsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDToolsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DBC0DB1F8B80CF0035BFA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D0DBC0DC1F8B80CF0035BFA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,8 +90,8 @@
 		B84E041E218AAC730092FD1C /* MDProtocolImplementation */ = {
 			isa = PBXGroup;
 			children = (
-				B812B9BC218AAA5300D3E6F8 /* ProtocolImplementation.h */,
-				B812B9BD218AAA5300D3E6F8 /* ProtocolImplementation.m */,
+				B812B9BC218AAA5300D3E6F8 /* MDProtocolImplementation.h */,
+				B812B9BD218AAA5300D3E6F8 /* MDProtocolImplementation.m */,
 			);
 			path = MDProtocolImplementation;
 			sourceTree = "<group>";
@@ -305,7 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B812B9BE218AAA5300D3E6F8 /* ProtocolImplementation.m in Sources */,
+				B812B9BE218AAA5300D3E6F8 /* MDProtocolImplementation.m in Sources */,
 				D0DBC0E01F8B80CF0035BFA0 /* ViewController.m in Sources */,
 				D0DBC0EB1F8B80CF0035BFA0 /* main.m in Sources */,
 				D0DBC0DD1F8B80CF0035BFA0 /* AppDelegate.m in Sources */,
