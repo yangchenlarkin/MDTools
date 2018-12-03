@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B812B9BE218AAA5300D3E6F8 /* MDProtocolImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = B812B9BD218AAA5300D3E6F8 /* MDProtocolImplementation.m */; };
+		D056E2A621B525080088F6BB /* NSInvocation+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2A021B525070088F6BB /* NSInvocation+Block.m */; };
+		D056E2A721B525080088F6BB /* MDAspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2A121B525070088F6BB /* MDAspects.m */; };
+		D056E2A821B525080088F6BB /* NSObject+Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2A221B525070088F6BB /* NSObject+Aspects.m */; };
+		D056E2AB21B526200088F6BB /* TMDProtocolImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2AA21B526200088F6BB /* TMDProtocolImplementation.m */; };
+		D056E2AE21B526450088F6BB /* TMDProtocolImplementation_protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2AD21B526450088F6BB /* TMDProtocolImplementation_protocol.m */; };
 		D0DBC0DD1F8B80CF0035BFA0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DC1F8B80CF0035BFA0 /* AppDelegate.m */; };
 		D0DBC0E01F8B80CF0035BFA0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0DF1F8B80CF0035BFA0 /* ViewController.m */; };
 		D0DBC0E31F8B80CF0035BFA0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC0E11F8B80CF0035BFA0 /* Main.storyboard */; };
@@ -37,8 +42,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B812B9BC218AAA5300D3E6F8 /* MDProtocolImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDProtocolImplementation.h; sourceTree = "<group>"; };
 		B812B9BD218AAA5300D3E6F8 /* MDProtocolImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDProtocolImplementation.m; sourceTree = "<group>"; };
+		D056E2A021B525070088F6BB /* NSInvocation+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+Block.m"; sourceTree = "<group>"; };
+		D056E2A121B525070088F6BB /* MDAspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAspects.m; sourceTree = "<group>"; };
+		D056E2A221B525070088F6BB /* NSObject+Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Aspects.m"; sourceTree = "<group>"; };
+		D056E2A321B525070088F6BB /* NSInvocation+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+Block.h"; sourceTree = "<group>"; };
+		D056E2A421B525070088F6BB /* MDAspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAspects.h; sourceTree = "<group>"; };
+		D056E2A521B525070088F6BB /* NSObject+Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Aspects.h"; sourceTree = "<group>"; };
+		D056E2AA21B526200088F6BB /* TMDProtocolImplementation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMDProtocolImplementation.m; sourceTree = "<group>"; };
+		D056E2AC21B526450088F6BB /* TMDProtocolImplementation_protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMDProtocolImplementation_protocol.h; sourceTree = "<group>"; };
+		D056E2AD21B526450088F6BB /* TMDProtocolImplementation_protocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMDProtocolImplementation_protocol.m; sourceTree = "<group>"; };
+		D056E2AF21B5268C0088F6BB /* MDProtocolImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDProtocolImplementation.h; sourceTree = "<group>"; };
 		D0DBC0D81F8B80CF0035BFA0 /* MDToolsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDToolsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DBC0DB1F8B80CF0035BFA0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D0DBC0DC1F8B80CF0035BFA0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,7 +104,7 @@
 		B84E041E218AAC730092FD1C /* MDProtocolImplementation */ = {
 			isa = PBXGroup;
 			children = (
-				B812B9BC218AAA5300D3E6F8 /* MDProtocolImplementation.h */,
+				D056E2AF21B5268C0088F6BB /* MDProtocolImplementation.h */,
 				B812B9BD218AAA5300D3E6F8 /* MDProtocolImplementation.m */,
 			);
 			path = MDProtocolImplementation;
@@ -101,6 +115,29 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D056E29F21B525070088F6BB /* MDAspects */ = {
+			isa = PBXGroup;
+			children = (
+				D056E2A321B525070088F6BB /* NSInvocation+Block.h */,
+				D056E2A021B525070088F6BB /* NSInvocation+Block.m */,
+				D056E2A421B525070088F6BB /* MDAspects.h */,
+				D056E2A121B525070088F6BB /* MDAspects.m */,
+				D056E2A521B525070088F6BB /* NSObject+Aspects.h */,
+				D056E2A221B525070088F6BB /* NSObject+Aspects.m */,
+			);
+			path = MDAspects;
+			sourceTree = "<group>";
+		};
+		D056E2A921B525E50088F6BB /* MDProtocolImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				D056E2AA21B526200088F6BB /* TMDProtocolImplementation.m */,
+				D056E2AC21B526450088F6BB /* TMDProtocolImplementation_protocol.h */,
+				D056E2AD21B526450088F6BB /* TMDProtocolImplementation_protocol.m */,
+			);
+			path = MDProtocolImplementation;
 			sourceTree = "<group>";
 		};
 		D0DBC0CF1F8B80CF0035BFA0 = {
@@ -142,6 +179,7 @@
 		D0DBC0F31F8B80CF0035BFA0 /* MDToolsDemoTests */ = {
 			isa = PBXGroup;
 			children = (
+				D056E2A921B525E50088F6BB /* MDProtocolImplementation */,
 				D0DBC1041F8B80F40035BFA0 /* MDListener */,
 				D0DBC0FF1F8B80F40035BFA0 /* MDTask */,
 				D0DBC0F61F8B80CF0035BFA0 /* Info.plist */,
@@ -171,6 +209,7 @@
 		D0DBC10B1F8B80FB0035BFA0 /* MDTools */ = {
 			isa = PBXGroup;
 			children = (
+				D056E29F21B525070088F6BB /* MDAspects */,
 				B84E041E218AAC730092FD1C /* MDProtocolImplementation */,
 				D0DBC10C1F8B80FB0035BFA0 /* MDListener */,
 				D0DBC10F1F8B80FB0035BFA0 /* MDTask */,
@@ -305,9 +344,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D056E2A621B525080088F6BB /* NSInvocation+Block.m in Sources */,
 				B812B9BE218AAA5300D3E6F8 /* MDProtocolImplementation.m in Sources */,
 				D0DBC0E01F8B80CF0035BFA0 /* ViewController.m in Sources */,
+				D056E2A821B525080088F6BB /* NSObject+Aspects.m in Sources */,
 				D0DBC0EB1F8B80CF0035BFA0 /* main.m in Sources */,
+				D056E2A721B525080088F6BB /* MDAspects.m in Sources */,
 				D0DBC0DD1F8B80CF0035BFA0 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +359,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0DBC1091F8B80F40035BFA0 /* TMDTasks.m in Sources */,
+				D056E2AE21B526450088F6BB /* TMDProtocolImplementation_protocol.m in Sources */,
+				D056E2AB21B526200088F6BB /* TMDProtocolImplementation.m in Sources */,
 				D0DBC11D1F8B80FB0035BFA0 /* NSSet+MDTask.m in Sources */,
 				D0DBC11A1F8B80FB0035BFA0 /* MDTask.m in Sources */,
 				D0DBC11B1F8B80FB0035BFA0 /* NSArray+MDTask.m in Sources */,
