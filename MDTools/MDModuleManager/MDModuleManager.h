@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "UIViewController+ModuleManager.h"
+#import "MDProtocolImplementation.h"
 
 @protocol MDModuleManager <NSObject>
 @optional

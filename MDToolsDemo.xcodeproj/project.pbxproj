@@ -23,6 +23,11 @@
 		D056E2D021B52F860088F6BB /* DemoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2C721B52F860088F6BB /* DemoView.m */; };
 		D056E2DB21B535A10088F6BB /* MDModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2B721B52E350088F6BB /* MDModuleManager.m */; };
 		D056E2DC21B535A10088F6BB /* UIViewController+ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2B821B52E350088F6BB /* UIViewController+ModuleManager.m */; };
+		D056E2E021B633130088F6BB /* DemoAppDelegate_image.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2DE21B633130088F6BB /* DemoAppDelegate_image.m */; };
+		D056E2E421B64E4D0088F6BB /* MDMMImageHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2E321B64E4D0088F6BB /* MDMMImageHomeViewController.m */; };
+		D056E2E721B64E820088F6BB /* MDMMImageModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2E621B64E820088F6BB /* MDMMImageModuleManager.m */; };
+		D056E2EE21B653AE0088F6BB /* MDMMImageCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2ED21B653AE0088F6BB /* MDMMImageCutViewController.m */; };
+		D056E2F121B656850088F6BB /* MDMMImageProcess1.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2F021B656850088F6BB /* MDMMImageProcess1.m */; };
 		D0DBC0E51F8B80CF0035BFA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC0E41F8B80CF0035BFA0 /* Assets.xcassets */; };
 		D0DBC0E81F8B80CF0035BFA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC0E61F8B80CF0035BFA0 /* LaunchScreen.storyboard */; };
 		D0DBC0EB1F8B80CF0035BFA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0EA1F8B80CF0035BFA0 /* main.m */; };
@@ -75,6 +80,16 @@
 		D056E2C721B52F860088F6BB /* DemoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoView.m; sourceTree = "<group>"; };
 		D056E2C921B52F860088F6BB /* DemoModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoModuleManager.h; sourceTree = "<group>"; };
 		D056E2CA21B52F860088F6BB /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		D056E2DE21B633130088F6BB /* DemoAppDelegate_image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoAppDelegate_image.m; sourceTree = "<group>"; };
+		D056E2DF21B633130088F6BB /* DemoAppDelegate_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoAppDelegate_image.h; sourceTree = "<group>"; };
+		D056E2E221B64E4D0088F6BB /* MDMMImageHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageHomeViewController.h; sourceTree = "<group>"; };
+		D056E2E321B64E4D0088F6BB /* MDMMImageHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageHomeViewController.m; sourceTree = "<group>"; };
+		D056E2E521B64E820088F6BB /* MDMMImageModuleManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageModuleManager.h; sourceTree = "<group>"; };
+		D056E2E621B64E820088F6BB /* MDMMImageModuleManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageModuleManager.m; sourceTree = "<group>"; };
+		D056E2EC21B653AE0088F6BB /* MDMMImageCutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageCutViewController.h; sourceTree = "<group>"; };
+		D056E2ED21B653AE0088F6BB /* MDMMImageCutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageCutViewController.m; sourceTree = "<group>"; };
+		D056E2EF21B656850088F6BB /* MDMMImageProcess1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageProcess1.h; sourceTree = "<group>"; };
+		D056E2F021B656850088F6BB /* MDMMImageProcess1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageProcess1.m; sourceTree = "<group>"; };
 		D0DBC0D81F8B80CF0035BFA0 /* MDToolsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDToolsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DBC0E41F8B80CF0035BFA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0DBC0E71F8B80CF0035BFA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -193,6 +208,63 @@
 			path = MDModuleManagerDemo;
 			sourceTree = "<group>";
 		};
+		D056E2DD21B632350088F6BB /* MDModuleManagerDemo_image */ = {
+			isa = PBXGroup;
+			children = (
+				D056E2E121B64BF30088F6BB /* ViewControllers */,
+				D056E2DF21B633130088F6BB /* DemoAppDelegate_image.h */,
+				D056E2DE21B633130088F6BB /* DemoAppDelegate_image.m */,
+			);
+			path = MDModuleManagerDemo_image;
+			sourceTree = "<group>";
+		};
+		D056E2E121B64BF30088F6BB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D056E2EA21B653650088F6BB /* ViewControllers */,
+				D056E2E921B6533F0088F6BB /* Process1 */,
+				D056E2EB21B653710088F6BB /* Process2 */,
+				D056E2E821B64E8B0088F6BB /* home */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D056E2E821B64E8B0088F6BB /* home */ = {
+			isa = PBXGroup;
+			children = (
+				D056E2E221B64E4D0088F6BB /* MDMMImageHomeViewController.h */,
+				D056E2E321B64E4D0088F6BB /* MDMMImageHomeViewController.m */,
+				D056E2E521B64E820088F6BB /* MDMMImageModuleManager.h */,
+				D056E2E621B64E820088F6BB /* MDMMImageModuleManager.m */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		D056E2E921B6533F0088F6BB /* Process1 */ = {
+			isa = PBXGroup;
+			children = (
+				D056E2EF21B656850088F6BB /* MDMMImageProcess1.h */,
+				D056E2F021B656850088F6BB /* MDMMImageProcess1.m */,
+			);
+			path = Process1;
+			sourceTree = "<group>";
+		};
+		D056E2EA21B653650088F6BB /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D056E2EC21B653AE0088F6BB /* MDMMImageCutViewController.h */,
+				D056E2ED21B653AE0088F6BB /* MDMMImageCutViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D056E2EB21B653710088F6BB /* Process2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Process2;
+			sourceTree = "<group>";
+		};
 		D0DBC0CF1F8B80CF0035BFA0 = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +288,7 @@
 		D0DBC0DA1F8B80CF0035BFA0 /* MDToolsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				D056E2DD21B632350088F6BB /* MDModuleManagerDemo_image */,
 				D056E2C021B52F670088F6BB /* MDModuleManagerDemo */,
 				D0DBC0E41F8B80CF0035BFA0 /* Assets.xcassets */,
 				D0DBC0E61F8B80CF0035BFA0 /* LaunchScreen.storyboard */,
@@ -394,6 +467,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D056E2E421B64E4D0088F6BB /* MDMMImageHomeViewController.m in Sources */,
 				D056E2DB21B535A10088F6BB /* MDModuleManager.m in Sources */,
 				D056E2DC21B535A10088F6BB /* UIViewController+ModuleManager.m in Sources */,
 				D056E2A621B525080088F6BB /* NSInvocation+Block.m in Sources */,
@@ -401,8 +475,12 @@
 				D056E2CF21B52F860088F6BB /* DemoViewController.m in Sources */,
 				D056E2CE21B52F860088F6BB /* DemoModuleManager.m in Sources */,
 				D056E2D021B52F860088F6BB /* DemoView.m in Sources */,
+				D056E2E721B64E820088F6BB /* MDMMImageModuleManager.m in Sources */,
 				D056E2A821B525080088F6BB /* NSObject+Aspects.m in Sources */,
 				D0DBC0EB1F8B80CF0035BFA0 /* main.m in Sources */,
+				D056E2EE21B653AE0088F6BB /* MDMMImageCutViewController.m in Sources */,
+				D056E2F121B656850088F6BB /* MDMMImageProcess1.m in Sources */,
+				D056E2E021B633130088F6BB /* DemoAppDelegate_image.m in Sources */,
 				D056E2CD21B52F860088F6BB /* DemoAppDelegate.m in Sources */,
 				D056E2A721B525080088F6BB /* MDAspects.m in Sources */,
 			);
@@ -456,7 +534,7 @@
 		D0DBC0F71F8B80CF0035BFA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -511,7 +589,7 @@
 		D0DBC0F81F8B80CF0035BFA0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DemoAppDelegate.h"
+#import "DemoAppDelegate_image.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([DemoAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([DemoAppDelegate_image class]));
     }
 }

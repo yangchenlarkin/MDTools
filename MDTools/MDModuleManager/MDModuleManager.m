@@ -18,6 +18,7 @@
 @property (nonatomic, weak) id object;
 
 @end
+
 @implementation _MVVMViewModuleWeakContainer
 
 + (_MVVMViewModuleWeakContainer *)containerWithObject:(id)object {
