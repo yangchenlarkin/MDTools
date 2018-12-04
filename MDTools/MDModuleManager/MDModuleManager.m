@@ -114,7 +114,8 @@
                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                    if (self.tailViewController == lastViewController) {
                                        self._lastViewControllerContainer.object = self.tailViewController;
-                                       [self._lastViewControllerContainer aspect_insertAfterSelector:@selector(setObject:) block:^(id<NSObjectAspectInfo> info) {
+                                       
+                                       [lastViewController aspect_insertBeforeSelector:NSSelectorFromString(@"dealloc") block:^(id<NSObjectAspectInfo> info) {
                                            typeof(weakSelf) self = weakSelf;
                                            if (!self._lastViewControllerContainer.object) {
                                                self.tailViewController.moduleManager = nil;
