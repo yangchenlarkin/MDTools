@@ -26,8 +26,12 @@
 		D056E2E021B633130088F6BB /* DemoAppDelegate_image.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2DE21B633130088F6BB /* DemoAppDelegate_image.m */; };
 		D056E2E421B64E4D0088F6BB /* MDMMImageHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2E321B64E4D0088F6BB /* MDMMImageHomeViewController.m */; };
 		D056E2E721B64E820088F6BB /* MDMMImageModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2E621B64E820088F6BB /* MDMMImageModuleManager.m */; };
-		D056E2EE21B653AE0088F6BB /* MDMMImageCutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2ED21B653AE0088F6BB /* MDMMImageCutViewController.m */; };
+		D056E2EE21B653AE0088F6BB /* MDMMImageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2ED21B653AE0088F6BB /* MDMMImageCropViewController.m */; };
 		D056E2F121B656850088F6BB /* MDMMImageProcess1.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2F021B656850088F6BB /* MDMMImageProcess1.m */; };
+		D056E2F421B676090088F6BB /* MDMMImageProcess2.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2F321B676090088F6BB /* MDMMImageProcess2.m */; };
+		D056E2F821B676270088F6BB /* MDMMImageProcess3.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2F621B676260088F6BB /* MDMMImageProcess3.m */; };
+		D056E2FB21B676FC0088F6BB /* MDMMImageGrayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2FA21B676FC0088F6BB /* MDMMImageGrayViewController.m */; };
+		D056E2FE21B679500088F6BB /* MDMMImageLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2FD21B679500088F6BB /* MDMMImageLogoViewController.m */; };
 		D0DBC0E51F8B80CF0035BFA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC0E41F8B80CF0035BFA0 /* Assets.xcassets */; };
 		D0DBC0E81F8B80CF0035BFA0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0DBC0E61F8B80CF0035BFA0 /* LaunchScreen.storyboard */; };
 		D0DBC0EB1F8B80CF0035BFA0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DBC0EA1F8B80CF0035BFA0 /* main.m */; };
@@ -86,10 +90,18 @@
 		D056E2E321B64E4D0088F6BB /* MDMMImageHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageHomeViewController.m; sourceTree = "<group>"; };
 		D056E2E521B64E820088F6BB /* MDMMImageModuleManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageModuleManager.h; sourceTree = "<group>"; };
 		D056E2E621B64E820088F6BB /* MDMMImageModuleManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageModuleManager.m; sourceTree = "<group>"; };
-		D056E2EC21B653AE0088F6BB /* MDMMImageCutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageCutViewController.h; sourceTree = "<group>"; };
-		D056E2ED21B653AE0088F6BB /* MDMMImageCutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageCutViewController.m; sourceTree = "<group>"; };
+		D056E2EC21B653AE0088F6BB /* MDMMImageCropViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageCropViewController.h; sourceTree = "<group>"; };
+		D056E2ED21B653AE0088F6BB /* MDMMImageCropViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageCropViewController.m; sourceTree = "<group>"; };
 		D056E2EF21B656850088F6BB /* MDMMImageProcess1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageProcess1.h; sourceTree = "<group>"; };
 		D056E2F021B656850088F6BB /* MDMMImageProcess1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageProcess1.m; sourceTree = "<group>"; };
+		D056E2F221B676090088F6BB /* MDMMImageProcess2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMMImageProcess2.h; sourceTree = "<group>"; };
+		D056E2F321B676090088F6BB /* MDMMImageProcess2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMMImageProcess2.m; sourceTree = "<group>"; };
+		D056E2F621B676260088F6BB /* MDMMImageProcess3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDMMImageProcess3.m; sourceTree = "<group>"; };
+		D056E2F721B676260088F6BB /* MDMMImageProcess3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDMMImageProcess3.h; sourceTree = "<group>"; };
+		D056E2F921B676FC0088F6BB /* MDMMImageGrayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageGrayViewController.h; sourceTree = "<group>"; };
+		D056E2FA21B676FC0088F6BB /* MDMMImageGrayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageGrayViewController.m; sourceTree = "<group>"; };
+		D056E2FC21B679500088F6BB /* MDMMImageLogoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MDMMImageLogoViewController.h; sourceTree = "<group>"; };
+		D056E2FD21B679500088F6BB /* MDMMImageLogoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MDMMImageLogoViewController.m; sourceTree = "<group>"; };
 		D0DBC0D81F8B80CF0035BFA0 /* MDToolsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDToolsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DBC0E41F8B80CF0035BFA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D0DBC0E71F8B80CF0035BFA0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -224,6 +236,7 @@
 				D056E2EA21B653650088F6BB /* ViewControllers */,
 				D056E2E921B6533F0088F6BB /* Process1 */,
 				D056E2EB21B653710088F6BB /* Process2 */,
+				D056E2F521B676260088F6BB /* Process3 */,
 				D056E2E821B64E8B0088F6BB /* home */,
 			);
 			path = ViewControllers;
@@ -252,8 +265,12 @@
 		D056E2EA21B653650088F6BB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D056E2EC21B653AE0088F6BB /* MDMMImageCutViewController.h */,
-				D056E2ED21B653AE0088F6BB /* MDMMImageCutViewController.m */,
+				D056E2EC21B653AE0088F6BB /* MDMMImageCropViewController.h */,
+				D056E2ED21B653AE0088F6BB /* MDMMImageCropViewController.m */,
+				D056E2F921B676FC0088F6BB /* MDMMImageGrayViewController.h */,
+				D056E2FA21B676FC0088F6BB /* MDMMImageGrayViewController.m */,
+				D056E2FC21B679500088F6BB /* MDMMImageLogoViewController.h */,
+				D056E2FD21B679500088F6BB /* MDMMImageLogoViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -261,8 +278,19 @@
 		D056E2EB21B653710088F6BB /* Process2 */ = {
 			isa = PBXGroup;
 			children = (
+				D056E2F221B676090088F6BB /* MDMMImageProcess2.h */,
+				D056E2F321B676090088F6BB /* MDMMImageProcess2.m */,
 			);
 			path = Process2;
+			sourceTree = "<group>";
+		};
+		D056E2F521B676260088F6BB /* Process3 */ = {
+			isa = PBXGroup;
+			children = (
+				D056E2F721B676260088F6BB /* MDMMImageProcess3.h */,
+				D056E2F621B676260088F6BB /* MDMMImageProcess3.m */,
+			);
+			path = Process3;
 			sourceTree = "<group>";
 		};
 		D0DBC0CF1F8B80CF0035BFA0 = {
@@ -473,13 +501,17 @@
 				D056E2A621B525080088F6BB /* NSInvocation+Block.m in Sources */,
 				B812B9BE218AAA5300D3E6F8 /* MDProtocolImplementation.m in Sources */,
 				D056E2CF21B52F860088F6BB /* DemoViewController.m in Sources */,
+				D056E2FE21B679500088F6BB /* MDMMImageLogoViewController.m in Sources */,
 				D056E2CE21B52F860088F6BB /* DemoModuleManager.m in Sources */,
 				D056E2D021B52F860088F6BB /* DemoView.m in Sources */,
+				D056E2FB21B676FC0088F6BB /* MDMMImageGrayViewController.m in Sources */,
 				D056E2E721B64E820088F6BB /* MDMMImageModuleManager.m in Sources */,
 				D056E2A821B525080088F6BB /* NSObject+Aspects.m in Sources */,
+				D056E2F821B676270088F6BB /* MDMMImageProcess3.m in Sources */,
 				D0DBC0EB1F8B80CF0035BFA0 /* main.m in Sources */,
-				D056E2EE21B653AE0088F6BB /* MDMMImageCutViewController.m in Sources */,
+				D056E2EE21B653AE0088F6BB /* MDMMImageCropViewController.m in Sources */,
 				D056E2F121B656850088F6BB /* MDMMImageProcess1.m in Sources */,
+				D056E2F421B676090088F6BB /* MDMMImageProcess2.m in Sources */,
 				D056E2E021B633130088F6BB /* DemoAppDelegate_image.m in Sources */,
 				D056E2CD21B52F860088F6BB /* DemoAppDelegate.m in Sources */,
 				D056E2A721B525080088F6BB /* MDAspects.m in Sources */,

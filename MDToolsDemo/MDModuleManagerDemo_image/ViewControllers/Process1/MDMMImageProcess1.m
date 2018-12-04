@@ -7,7 +7,7 @@
 //
 
 #import "MDMMImageProcess1.h"
-#import "MDMMImageCutViewController.h"
+#import "MDMMImageCropViewController.h"
 
 @interface MDMMImageProcess1()
 
@@ -27,9 +27,12 @@ __ImplementationProtocol__
 }
 
 - (UIViewController *)generateRootViewController {
-    MDMMImageCutViewController *vc = [[MDMMImageCutViewController alloc] initWithImage:self.originImage];
+    MDMMImageCropViewController *vc = [[MDMMImageCropViewController alloc] initWithImage:self.originImage];
+    __weak typeof (self) _w_self = self;
     vc.didFinish = ^(UIImage * _Nonnull image) {
-        
+        if (_w_self.didFinish) {
+            _w_self.didFinish(image);
+        }
     };
     return vc;
 }

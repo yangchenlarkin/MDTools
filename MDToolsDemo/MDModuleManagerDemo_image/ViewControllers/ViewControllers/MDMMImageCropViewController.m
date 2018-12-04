@@ -1,20 +1,20 @@
 //
-//  MDMMImageCutViewController.m
+//  MDMMImageCropViewController.m
 //  MDToolsDemo
 //
 //  Created by Larkin Yang on 2018/12/4.
 //  Copyright © 2018 Larkin. All rights reserved.
 //
 
-#import "MDMMImageCutViewController.h"
+#import "MDMMImageCropViewController.h"
 
-@interface MDMMImageCutViewController ()
+@interface MDMMImageCropViewController ()
 
 @property (nonatomic, strong) UIImage *image;
 
 @end
 
-@implementation MDMMImageCutViewController
+@implementation MDMMImageCropViewController
 
 - (instancetype)initWithImage:(UIImage *)image {
     if (self = [super init]) {
@@ -31,11 +31,11 @@
     imageView.image = self.image;
     [self.view addSubview:imageView];
     
-    UIView *mask1 = [[UIView alloc] initWithFrame:CGRectMake(width / 2.f, 0, width / 2.f, width)];
+    UIView *mask1 = [[UIView alloc] initWithFrame:CGRectMake(width / 2.f, 0, width / 2.f, 400)];
     mask1.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
     [imageView addSubview:mask1];
     
-    UIView *mask2 = [[UIView alloc] initWithFrame:CGRectMake(0, width / 2.f, width / 2.f, width / 2.f)];
+    UIView *mask2 = [[UIView alloc] initWithFrame:CGRectMake(0, 400 / 2.f, width / 2.f, 400 / 2.f)];
     mask2.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
     [imageView addSubview:mask2];
     
@@ -54,11 +54,11 @@
 
 - (void)finish {
     if (self.didFinish) {
-        self.didFinish([self cropSquareImage:self.image]);
+        self.didFinish([self cropImage:self.image]);
     }
 }
 
-- (UIImage *)cropSquareImage:(UIImage *)image {
+- (UIImage *)cropImage:(UIImage *)image {
     CGImageRef sourceImageRef = [image CGImage];
     
     CGFloat _imageWidth = image.size.width * image.scale;
