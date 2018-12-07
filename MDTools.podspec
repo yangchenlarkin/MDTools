@@ -8,14 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name          = "MDTools"
-  s.version       = "0.0.4"
+  s.version       = "0.0.5"
   s.summary       = "Tools for Objcetive-C."
   s.homepage      = "https://github.com/yangchenlarkin/MDTools"
   s.license       = "MIT"
-  s.author        = { "Larkin" => "yangchenlarkin@gmail.com" }
+  s.author        = { "xupeng48" => "13585548248@163.com" }
   s.platform      = :ios
   s.source        = { :git => "https://github.com/yangchenlarkin/MDTools.git", :tag => "#{s.version}" }
-  s.source_files  = "MDTools/**/*.{h,m}"
+  s.source_files  = "MDTools/**"
   s.framework     = "Foundation"
 
   s.subspec 'MDListener' do |sl|
@@ -29,8 +29,8 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'MDProtocolImplementation' do |sp|
-  	sp.name         = "MDProtocolImplementation"
-  	sp.source_files = "MDTools/MDProtocolImplementation/*.{h,m}"
+    sp.name         = "MDProtocolImplementation"
+    sp.source_files = "MDTools/MDProtocolImplementation/*.{h,m}"
   end
 
    s.subspec 'MDAspects' do |sa|
@@ -39,8 +39,8 @@ Pod::Spec.new do |s|
   end
 
   s.subspec 'MDModuleManager' do |sm|
-  	sm.name         = "MDModuleManager"
-  	sm.source_files = "MDTools/MDModuleManager/*.{h,m}"
+    sm.name         = "MDModuleManager"
+    sm.source_files = "MDTools/MDModuleManager/*.{h,m}"
     sm.dependency 'MDTools/MDProtocolImplementation'
     sm.dependency 'MDTools/MDAspects'
 
