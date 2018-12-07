@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.author        = { "xupeng48" => "13585548248@163.com" }
   s.platform      = :ios
   s.source        = { :git => "https://github.com/yangchenlarkin/MDTools.git", :tag => "#{s.version}" }
-  s.source_files  = "MDTools"
+  s.source_files  = "MDTools/**/*"
   s.framework     = "Foundation"
 
   s.subspec 'MDListener' do |sl|
