@@ -35,8 +35,8 @@
 }
 
 - (void)performAction:(MDListenerAction)action {
-    for (id object in self.listeners) {
-        if (self.listeners) {
+    for (id object in self.listeners.copy) {
+        if (action) {
             action(object);
         }
     }
