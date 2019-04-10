@@ -15,19 +15,19 @@ MDTools是一个工具集合，目前开源了五个工具：
 
 你可以一次安装所有模块：
 
-    pod 'MDTools', '~>0.0.4'
+    pod 'MDTools', '~>0.0.6'
 
 也可以单独安装子模块:
 
-    pod 'MDTools/MDTask', '~>0.0.4'
+    pod 'MDTools/MDTask', '~>0.0.6'
 
-    pod 'MDTools/MDListener', '~>0.0.4'
+    pod 'MDTools/MDListener', '~>0.0.6'
 
-    pod 'MDTools/MDProtocolImplementation', '~>0.0.4'
+    pod 'MDTools/MDProtocolImplementation', '~>0.0.6'
 
-    pod 'MDTools/MDAspects', '~>0.0.4'
+    pod 'MDTools/MDAspects', '~>0.0.6'
 
-    pod 'MDTools/MDModuleManager', '~>0.0.4'
+    pod 'MDTools/MDModuleManager', '~>0.0.6'
 
 ## 1.MDTask
 
