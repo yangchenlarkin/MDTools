@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name          = "MDTools"
-  s.version       = "0.0.6"
+  s.version       = "0.0.7"
   s.summary       = "Tools for Objcetive-C."
   s.homepage      = "https://github.com/yangchenlarkin/MDTools"
   s.license       = "MIT"
@@ -33,17 +33,11 @@ Pod::Spec.new do |s|
     sp.source_files = "MDTools/MDProtocolImplementation/*.{h,m}"
   end
 
-   s.subspec 'MDAspects' do |sa|
-    sa.name         = "MDAspects"
-    sa.source_files = "MDTools/MDAspects/*.{h,m}"
-  end
-
   s.subspec 'MDModuleManager' do |sm|
     sm.name         = "MDModuleManager"
     sm.source_files = "MDTools/MDModuleManager/*.{h,m}"
     sm.dependency 'MDTools/MDProtocolImplementation'
-    sm.dependency 'MDTools/MDAspects'
-
+    sm.dependency 'Aspects', '~> 1.4.1'
   end
 
 end
