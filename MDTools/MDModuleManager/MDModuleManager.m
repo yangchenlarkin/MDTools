@@ -10,7 +10,8 @@
 #import "MDProtocolImplementation.h"
 #import <objc/runtime.h>
 #import "UIViewController+ModuleManager.h"
-#import "NSObject+Aspects.h"
+//#import "NSObject+Aspects.h"
+#import <Aspects/Aspects.h>
 
 
 @interface _MVVMViewModuleWeakContainer : NSObject
@@ -94,9 +95,9 @@
     return _aspectTokens;
 }
 
-- (void)_addAspectWithSelector:(SEL)sel block:(void (^)(id<NSObjectAspectInfo> info))block {
+- (void)_addAspectToObject:(id)object withSelector:(SEL)sel block:(void (^)(id<AspectInfo> info))block {
     NSError *error;
-    id token = [self.navigationController aspect_insertBeforeSelector:sel block:block];
+    id token = [object aspect_hookSelector:sel withOptions:AspectPositionBefore usingBlock:block error:&error];
     if (token) {
         [[self _aspectTokens] addObject:token];
     } else {
@@ -107,15 +108,15 @@
 - (void)_loadAspects {
     __weak typeof(self) weakSelf = self;
     
-    [self _addAspectWithSelector:@selector(popViewControllerAnimated:)
-                           block:^(id<NSObjectAspectInfo> info) {
+    [self _addAspectToObject:self.navigationController
+     withSelector:@selector(popViewControllerAnimated:)
+                           block:^(id<AspectInfo> info) {
                                typeof(weakSelf) self = weakSelf;
                                UIViewController *lastViewController = self.navigationController.viewControllers.lastObject;
                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                    if (self.tailViewController == lastViewController) {
                                        self._lastViewControllerContainer.object = self.tailViewController;
-                                       
-                                       [lastViewController aspect_insertBeforeSelector:NSSelectorFromString(@"dealloc") block:^(id<NSObjectAspectInfo> info) {
+                                       [self _addAspectToObject:lastViewController withSelector:NSSelectorFromString(@"dealloc") block:^(id<AspectInfo> info) {
                                            typeof(weakSelf) self = weakSelf;
                                            if (!self._lastViewControllerContainer.object) {
                                                self.tailViewController.moduleManager = nil;
@@ -127,40 +128,44 @@
                                });
                            }];
     
-    [self _addAspectWithSelector:@selector(popToViewController:animated:) block:^(id<NSObjectAspectInfo> info) {
-        typeof(weakSelf) self = weakSelf;
-        NSUInteger index = [self.navigationController.viewControllers indexOfObject:info.arguments[0]] + 1;
-        NSArray *res = [self.navigationController.viewControllers subarrayWithRange:NSMakeRange(index, self.navigationController.viewControllers.count - index)];
-        [res enumerateObjectsUsingBlock:^(UIViewController *viewController, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([weakSelf _containViewController:viewController]) {
-                viewController.moduleManager = nil;
-            }
-        }];
-        [self _removeViewControllers:res];
-    }];
-    
-    [self _addAspectWithSelector:@selector(popToRootViewControllerAnimated:)
-                           block:^(id<NSObjectAspectInfo> info) {
-                               typeof(weakSelf) self = weakSelf;
-                               if (self.rootViewController == self.navigationController.viewControllers.firstObject) {
-                                   [self._mutableViewController enumerateObjectsUsingBlock:^(_MVVMViewModuleWeakContainer *viewControllerValue, NSUInteger idx, BOOL * _Nonnull stop) {
-                                       if (idx) {
-                                           [[viewControllerValue object] setModuleManager:nil];
-                                       }
-                                   }];
-                                   
-                                   [self._mutableViewController removeAllObjects];
-                                   [self._mutableViewController addObject:[_MVVMViewModuleWeakContainer containerWithObject:self.navigationController.viewControllers.firstObject]];
-                               } else {
-                                   for (_MVVMViewModuleWeakContainer *viewControllerValue in self._mutableViewController) {
-                                       [[viewControllerValue object] setModuleManager:nil];
-                                   }
-                                   [self._mutableViewController removeAllObjects];
+    [self _addAspectToObject:self.navigationController
+     withSelector:@selector(popToViewController:animated:)
+                       block:^(id<AspectInfo> info) {
+                           typeof(weakSelf) self = weakSelf;
+                           NSUInteger index = [self.navigationController.viewControllers indexOfObject:info.arguments[0]] + 1;
+                           NSArray *res = [self.navigationController.viewControllers subarrayWithRange:NSMakeRange(index, self.navigationController.viewControllers.count - index)];
+                           [res enumerateObjectsUsingBlock:^(UIViewController *viewController, NSUInteger idx, BOOL * _Nonnull stop) {
+                               if ([weakSelf _containViewController:viewController]) {
+                                   viewController.moduleManager = nil;
                                }
                            }];
+                           [self _removeViewControllers:res];
+                       }];
     
-    [self _addAspectWithSelector:@selector(setViewControllers:)
-                           block:^(id<NSObjectAspectInfo> info) {
+    [self _addAspectToObject:self.navigationController
+                withSelector:@selector(popToRootViewControllerAnimated:)
+                       block:^(id<AspectInfo> info) {
+                           typeof(weakSelf) self = weakSelf;
+                           if (self.rootViewController == self.navigationController.viewControllers.firstObject) {
+                               [self._mutableViewController enumerateObjectsUsingBlock:^(_MVVMViewModuleWeakContainer *viewControllerValue, NSUInteger idx, BOOL * _Nonnull stop) {
+                                   if (idx) {
+                                       [[viewControllerValue object] setModuleManager:nil];
+                                   }
+                               }];
+                               
+                               [self._mutableViewController removeAllObjects];
+                               [self._mutableViewController addObject:[_MVVMViewModuleWeakContainer containerWithObject:self.navigationController.viewControllers.firstObject]];
+                           } else {
+                               for (_MVVMViewModuleWeakContainer *viewControllerValue in self._mutableViewController) {
+                                   [[viewControllerValue object] setModuleManager:nil];
+                               }
+                               [self._mutableViewController removeAllObjects];
+                           }
+                       }];
+    
+    [self _addAspectToObject:self.navigationController
+                withSelector:@selector(setViewControllers:)
+                           block:^(id<AspectInfo> info) {
                                typeof(weakSelf) self = weakSelf;
                                [[self _mutableViewController] removeAllObjects];
                                for (UIViewController *vc in [info arguments][0]) {
@@ -170,8 +175,9 @@
                                }
                            }];
     
-    [self _addAspectWithSelector:@selector(setViewControllers:animated:)
-                           block:^(id<NSObjectAspectInfo> info) {
+    [self _addAspectToObject:self.navigationController
+                withSelector:@selector(setViewControllers:animated:)
+                           block:^(id<AspectInfo> info) {
                                typeof(weakSelf) self = weakSelf;
                                [[self _mutableViewController] removeAllObjects];
                                for (UIViewController *vc in [info arguments][0]) {
@@ -183,8 +189,8 @@
 }
 
 - (void)_unloadAspects {
-    for (id token in self._aspectTokens) {
-        [self.navigationController aspect_removeBlock:token];
+    for (id<AspectToken> token in self._aspectTokens) {
+        [token remove];
     }
     [self._aspectTokens removeAllObjects];
 }

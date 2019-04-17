@@ -8,13 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		B812B9BE218AAA5300D3E6F8 /* MDProtocolImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = B812B9BD218AAA5300D3E6F8 /* MDProtocolImplementation.m */; };
-		D056E2A621B525080088F6BB /* NSInvocation+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2A021B525070088F6BB /* NSInvocation+Block.m */; };
-		D056E2A721B525080088F6BB /* MDAspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2A121B525070088F6BB /* MDAspects.m */; };
-		D056E2A821B525080088F6BB /* NSObject+Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2A221B525070088F6BB /* NSObject+Aspects.m */; };
+		C71C2518EC58CD2A6A6D8F67 /* libPods-MDToolsDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C700EF661FE2A8B79D74922 /* libPods-MDToolsDemo.a */; };
+		CCF693BEF10C7AB35956A531 /* libPods-MDToolsDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 738F3C327293A1FCDD6F53B9 /* libPods-MDToolsDemoTests.a */; };
 		D056E2AB21B526200088F6BB /* TMDProtocolImplementation.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2AA21B526200088F6BB /* TMDProtocolImplementation.m */; };
 		D056E2AE21B526450088F6BB /* TMDProtocolImplementation_protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2AD21B526450088F6BB /* TMDProtocolImplementation_protocol.m */; };
-		D056E2B221B528F70088F6BB /* TMDAspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2B121B528F70088F6BB /* TMDAspects.m */; };
-		D056E2B521B529B00088F6BB /* TMDAspects_testObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2B421B529B00088F6BB /* TMDAspects_testObject.m */; };
 		D056E2BB21B52E350088F6BB /* MDModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2B721B52E350088F6BB /* MDModuleManager.m */; };
 		D056E2BC21B52E350088F6BB /* UIViewController+ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2B821B52E350088F6BB /* UIViewController+ModuleManager.m */; };
 		D056E2CD21B52F860088F6BB /* DemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D056E2C221B52F860088F6BB /* DemoAppDelegate.m */; };
@@ -58,20 +55,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C700EF661FE2A8B79D74922 /* libPods-MDToolsDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MDToolsDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C272034D781991C2F9640E3 /* Pods-MDToolsDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-MDToolsDemoTests/Pods-MDToolsDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		43649AE27C9BF39242BB48CE /* Pods-MDToolsDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemo.release.xcconfig"; path = "Target Support Files/Pods-MDToolsDemo/Pods-MDToolsDemo.release.xcconfig"; sourceTree = "<group>"; };
+		71C3AC98C7B1D7E73CCC85A9 /* Pods-MDToolsDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemoTests.release.xcconfig"; path = "Target Support Files/Pods-MDToolsDemoTests/Pods-MDToolsDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		738F3C327293A1FCDD6F53B9 /* libPods-MDToolsDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MDToolsDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B812B9BD218AAA5300D3E6F8 /* MDProtocolImplementation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDProtocolImplementation.m; sourceTree = "<group>"; };
-		D056E2A021B525070088F6BB /* NSInvocation+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+Block.m"; sourceTree = "<group>"; };
-		D056E2A121B525070088F6BB /* MDAspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDAspects.m; sourceTree = "<group>"; };
-		D056E2A221B525070088F6BB /* NSObject+Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Aspects.m"; sourceTree = "<group>"; };
-		D056E2A321B525070088F6BB /* NSInvocation+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+Block.h"; sourceTree = "<group>"; };
-		D056E2A421B525070088F6BB /* MDAspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDAspects.h; sourceTree = "<group>"; };
-		D056E2A521B525070088F6BB /* NSObject+Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Aspects.h"; sourceTree = "<group>"; };
 		D056E2AA21B526200088F6BB /* TMDProtocolImplementation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMDProtocolImplementation.m; sourceTree = "<group>"; };
 		D056E2AC21B526450088F6BB /* TMDProtocolImplementation_protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMDProtocolImplementation_protocol.h; sourceTree = "<group>"; };
 		D056E2AD21B526450088F6BB /* TMDProtocolImplementation_protocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMDProtocolImplementation_protocol.m; sourceTree = "<group>"; };
 		D056E2AF21B5268C0088F6BB /* MDProtocolImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDProtocolImplementation.h; sourceTree = "<group>"; };
-		D056E2B121B528F70088F6BB /* TMDAspects.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMDAspects.m; sourceTree = "<group>"; };
-		D056E2B321B529B00088F6BB /* TMDAspects_testObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMDAspects_testObject.h; sourceTree = "<group>"; };
-		D056E2B421B529B00088F6BB /* TMDAspects_testObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TMDAspects_testObject.m; sourceTree = "<group>"; };
 		D056E2B721B52E350088F6BB /* MDModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDModuleManager.m; sourceTree = "<group>"; };
 		D056E2B821B52E350088F6BB /* UIViewController+ModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ModuleManager.m"; sourceTree = "<group>"; };
 		D056E2B921B52E350088F6BB /* MDModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDModuleManager.h; sourceTree = "<group>"; };
@@ -125,6 +118,7 @@
 		D0DBC1161F8B80FB0035BFA0 /* NSDictionary+MDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MDTask.m"; sourceTree = "<group>"; };
 		D0DBC1171F8B80FB0035BFA0 /* NSSet+MDTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+MDTask.h"; sourceTree = "<group>"; };
 		D0DBC1181F8B80FB0035BFA0 /* NSSet+MDTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+MDTask.m"; sourceTree = "<group>"; };
+		F33B9F7A76BA13296322CD9D /* Pods-MDToolsDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MDToolsDemo.debug.xcconfig"; path = "Target Support Files/Pods-MDToolsDemo/Pods-MDToolsDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C71C2518EC58CD2A6A6D8F67 /* libPods-MDToolsDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCF693BEF10C7AB35956A531 /* libPods-MDToolsDemoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,21 +153,21 @@
 		BBDD56C7655F5B536BE00A6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1C700EF661FE2A8B79D74922 /* libPods-MDToolsDemo.a */,
+				738F3C327293A1FCDD6F53B9 /* libPods-MDToolsDemoTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D056E29F21B525070088F6BB /* MDAspects */ = {
+		C6F01336B5DF70165076FFF6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D056E2A321B525070088F6BB /* NSInvocation+Block.h */,
-				D056E2A021B525070088F6BB /* NSInvocation+Block.m */,
-				D056E2A421B525070088F6BB /* MDAspects.h */,
-				D056E2A121B525070088F6BB /* MDAspects.m */,
-				D056E2A521B525070088F6BB /* NSObject+Aspects.h */,
-				D056E2A221B525070088F6BB /* NSObject+Aspects.m */,
+				F33B9F7A76BA13296322CD9D /* Pods-MDToolsDemo.debug.xcconfig */,
+				43649AE27C9BF39242BB48CE /* Pods-MDToolsDemo.release.xcconfig */,
+				2C272034D781991C2F9640E3 /* Pods-MDToolsDemoTests.debug.xcconfig */,
+				71C3AC98C7B1D7E73CCC85A9 /* Pods-MDToolsDemoTests.release.xcconfig */,
 			);
-			path = MDAspects;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		D056E2A921B525E50088F6BB /* MDProtocolImplementation */ = {
@@ -182,16 +178,6 @@
 				D056E2AD21B526450088F6BB /* TMDProtocolImplementation_protocol.m */,
 			);
 			path = MDProtocolImplementation;
-			sourceTree = "<group>";
-		};
-		D056E2B021B528E10088F6BB /* MDAspects */ = {
-			isa = PBXGroup;
-			children = (
-				D056E2B121B528F70088F6BB /* TMDAspects.m */,
-				D056E2B321B529B00088F6BB /* TMDAspects_testObject.h */,
-				D056E2B421B529B00088F6BB /* TMDAspects_testObject.m */,
-			);
-			path = MDAspects;
 			sourceTree = "<group>";
 		};
 		D056E2B621B52E350088F6BB /* MDModuleManager */ = {
@@ -301,6 +287,7 @@
 				D0DBC0F31F8B80CF0035BFA0 /* MDToolsDemoTests */,
 				D0DBC0D91F8B80CF0035BFA0 /* Products */,
 				BBDD56C7655F5B536BE00A6F /* Frameworks */,
+				C6F01336B5DF70165076FFF6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -329,7 +316,6 @@
 		D0DBC0F31F8B80CF0035BFA0 /* MDToolsDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				D056E2B021B528E10088F6BB /* MDAspects */,
 				D056E2A921B525E50088F6BB /* MDProtocolImplementation */,
 				D0DBC1041F8B80F40035BFA0 /* MDListener */,
 				D0DBC0FF1F8B80F40035BFA0 /* MDTask */,
@@ -361,7 +347,6 @@
 			isa = PBXGroup;
 			children = (
 				D056E2B621B52E350088F6BB /* MDModuleManager */,
-				D056E29F21B525070088F6BB /* MDAspects */,
 				B84E041E218AAC730092FD1C /* MDProtocolImplementation */,
 				D0DBC10C1F8B80FB0035BFA0 /* MDListener */,
 				D0DBC10F1F8B80FB0035BFA0 /* MDTask */,
@@ -401,6 +386,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0DBC0F91F8B80CF0035BFA0 /* Build configuration list for PBXNativeTarget "MDToolsDemo" */;
 			buildPhases = (
+				A2C2FA11FC91879EDC51C0E1 /* [CP] Check Pods Manifest.lock */,
 				D0DBC0D41F8B80CF0035BFA0 /* Sources */,
 				D0DBC0D51F8B80CF0035BFA0 /* Frameworks */,
 				D0DBC0D61F8B80CF0035BFA0 /* Resources */,
@@ -418,6 +404,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0DBC0FC1F8B80CF0035BFA0 /* Build configuration list for PBXNativeTarget "MDToolsDemoTests" */;
 			buildPhases = (
+				76B8B906F4B28B2FB954D96B /* [CP] Check Pods Manifest.lock */,
 				D0DBC0EC1F8B80CF0035BFA0 /* Sources */,
 				D0DBC0ED1F8B80CF0035BFA0 /* Frameworks */,
 				D0DBC0EE1F8B80CF0035BFA0 /* Resources */,
@@ -490,6 +477,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		76B8B906F4B28B2FB954D96B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MDToolsDemoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2C2FA11FC91879EDC51C0E1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MDToolsDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D0DBC0D41F8B80CF0035BFA0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -498,7 +532,6 @@
 				D056E2E421B64E4D0088F6BB /* MDMMImageHomeViewController.m in Sources */,
 				D056E2DB21B535A10088F6BB /* MDModuleManager.m in Sources */,
 				D056E2DC21B535A10088F6BB /* UIViewController+ModuleManager.m in Sources */,
-				D056E2A621B525080088F6BB /* NSInvocation+Block.m in Sources */,
 				B812B9BE218AAA5300D3E6F8 /* MDProtocolImplementation.m in Sources */,
 				D056E2CF21B52F860088F6BB /* DemoViewController.m in Sources */,
 				D056E2FE21B679500088F6BB /* MDMMImageLogoViewController.m in Sources */,
@@ -506,7 +539,6 @@
 				D056E2D021B52F860088F6BB /* DemoView.m in Sources */,
 				D056E2FB21B676FC0088F6BB /* MDMMImageGrayViewController.m in Sources */,
 				D056E2E721B64E820088F6BB /* MDMMImageModuleManager.m in Sources */,
-				D056E2A821B525080088F6BB /* NSObject+Aspects.m in Sources */,
 				D056E2F821B676270088F6BB /* MDMMImageProcess3.m in Sources */,
 				D0DBC0EB1F8B80CF0035BFA0 /* main.m in Sources */,
 				D056E2EE21B653AE0088F6BB /* MDMMImageCropViewController.m in Sources */,
@@ -514,7 +546,6 @@
 				D056E2F421B676090088F6BB /* MDMMImageProcess2.m in Sources */,
 				D056E2E021B633130088F6BB /* DemoAppDelegate_image.m in Sources */,
 				D056E2CD21B52F860088F6BB /* DemoAppDelegate.m in Sources */,
-				D056E2A721B525080088F6BB /* MDAspects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,8 +565,6 @@
 				D0DBC1081F8B80F40035BFA0 /* TMDTaskRetry.m in Sources */,
 				D0DBC1071F8B80F40035BFA0 /* TMDTaskCancel.m in Sources */,
 				D0DBC1191F8B80FB0035BFA0 /* MDListener.m in Sources */,
-				D056E2B521B529B00088F6BB /* TMDAspects_testObject.m in Sources */,
-				D056E2B221B528F70088F6BB /* TMDAspects.m in Sources */,
 				D0DBC11C1F8B80FB0035BFA0 /* NSDictionary+MDTask.m in Sources */,
 				D0DBC1061F8B80F40035BFA0 /* TMDTask.m in Sources */,
 			);
@@ -669,6 +698,7 @@
 		};
 		D0DBC0FA1F8B80CF0035BFA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F33B9F7A76BA13296322CD9D /* Pods-MDToolsDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -683,6 +713,7 @@
 		};
 		D0DBC0FB1F8B80CF0035BFA0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43649AE27C9BF39242BB48CE /* Pods-MDToolsDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -697,6 +728,7 @@
 		};
 		D0DBC0FD1F8B80CF0035BFA0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C272034D781991C2F9640E3 /* Pods-MDToolsDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -712,6 +744,7 @@
 		};
 		D0DBC0FE1F8B80CF0035BFA0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71C3AC98C7B1D7E73CCC85A9 /* Pods-MDToolsDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
