@@ -8,14 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name          = "MDTools"
-  s.version       = "0.0.7"
+  s.version       = "0.0.8"
   s.summary       = "Tools for Objcetive-C."
   s.homepage      = "https://github.com/yangchenlarkin/MDTools"
   s.license       = "MIT"
-  s.author        = { "xupeng48" => "13585548248@163.com" }
-  s.platform      = :ios
+  s.author        = { "Yang Chen" => "yangchenlarkin@gmail.com" }
+  s.platform      = :ios, "5.0"
   s.source        = { :git => "https://github.com/yangchenlarkin/MDTools.git", :tag => "#{s.version}" }
-  s.source_files  = "MDTools/**/*"
+#  s.source_files  = "MDTools/**/*"
   s.framework     = "Foundation"
 
   s.subspec 'MDListener' do |sl|
