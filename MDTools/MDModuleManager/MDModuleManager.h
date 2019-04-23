@@ -13,9 +13,11 @@
 
 @protocol MDModuleManager <NSObject>
 @optional
+#pragma mark - 子类重写
 - (UIViewController *)generateRootViewController;
+- (void)didLoadNavigationController;
 
-
+#pragma mark - public method
 @property (nonatomic, readonly) UINavigationController *navigationController;
 
 /*

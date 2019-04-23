@@ -269,6 +269,9 @@
     objc_setAssociatedObject(self, "__navigationController", theBlock, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     if (navigationController) {
         [self _loadAspects];
+        if ([self respondsToSelector:@selector(didLoadNavigationController)]) {
+            [self didLoadNavigationController];
+        }
     }
 }
 
