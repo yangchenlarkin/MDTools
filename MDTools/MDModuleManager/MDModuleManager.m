@@ -10,7 +10,6 @@
 #import "MDProtocolImplementation.h"
 #import <objc/runtime.h>
 #import "UIViewController+ModuleManager.h"
-//#import "NSObject+Aspects.h"
 #import <Aspects/Aspects.h>
 
 
@@ -95,7 +94,7 @@
     return _aspectTokens;
 }
 
-- (void)_addAspectToObject:(id)object withSelector:(SEL)sel block:(void (^)(id<AspectInfo> info))block {
+- (id)_addAspectToObject:(id)object withSelector:(SEL)sel block:(void (^)(id<AspectInfo> info))block {
     NSError *error;
     id token = [object aspect_hookSelector:sel withOptions:AspectPositionBefore usingBlock:block error:&error];
     if (token) {
@@ -103,6 +102,7 @@
     } else {
         NSLog(@"<Aspect: %@>", error);
     }
+    return token;
 }
 
 - (void)_loadAspects {
@@ -113,19 +113,19 @@
                            block:^(id<AspectInfo> info) {
                                typeof(weakSelf) self = weakSelf;
                                UIViewController *lastViewController = self.navigationController.viewControllers.lastObject;
-                               dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                   if (self.tailViewController == lastViewController) {
-                                       self._lastViewControllerContainer.object = self.tailViewController;
-                                       [self _addAspectToObject:lastViewController withSelector:NSSelectorFromString(@"dealloc") block:^(id<AspectInfo> info) {
-                                           typeof(weakSelf) self = weakSelf;
-                                           if (!self._lastViewControllerContainer.object) {
-                                               self.tailViewController.moduleManager = nil;
-                                               [self._mutableViewController removeLastObject];
-                                               [self _removeLastViewControllerContainer];
-                                           }
-                                       }];
-                                   }
-                               });
+                               if (self.tailViewController == lastViewController) {
+                                   self._lastViewControllerContainer.object = self.tailViewController;
+                                   __weak id<AspectToken> token = nil;
+                                   token = [self _addAspectToObject:lastViewController withSelector:NSSelectorFromString(@"dealloc") block:^(id<AspectInfo> info) {
+                                       [token remove];
+                                       typeof(weakSelf) self = weakSelf;
+                                       if (!self._lastViewControllerContainer.object) {
+                                           self.tailViewController.moduleManager = nil;
+                                           [self._mutableViewController removeLastObject];
+                                           [self _removeLastViewControllerContainer];
+                                       }
+                                   }];
+                               }
                            }];
     
     [self _addAspectToObject:self.navigationController
@@ -242,23 +242,33 @@
 
 - (UINavigationController *)navigationController {
     id (^block)(void) = objc_getAssociatedObject(self, "__navigationController");
-    return block ? block() : nil;
+    UINavigationController *navigationController = block ? block() : nil;
+    if (!navigationController) {
+        navigationController = [[UINavigationController alloc] initWithRootViewController:self.rootViewController];
+        [self _updateNavigationController:navigationController];
+    }
+    return navigationController;
 }
 
 - (void)setNavigationController:(UINavigationController *)navigationController {
     id (^block)(void) = objc_getAssociatedObject(self, "__navigationController");
     UINavigationController *_navigationController = block ? block() : nil;
     if (!_navigationController) {
-        
-        __weak id weakObject = navigationController;
-        id (^theBlock)(void) = ^{
-            return weakObject;
-        };
-        objc_setAssociatedObject(self, "__navigationController", theBlock, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        [self _unloadAspects];
-        [self _loadAspects];
+        [self _updateNavigationController:navigationController];
     } else if (_navigationController != navigationController && navigationController) {
         NSCAssert(NO, @"navigationController can only be called once.");
+    }
+}
+
+- (void)_updateNavigationController:(UINavigationController *)navigationController {
+    [self _unloadAspects];
+    __weak id weakObject = navigationController;
+    id (^theBlock)(void) = ^{
+        return weakObject;
+    };
+    objc_setAssociatedObject(self, "__navigationController", theBlock, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (navigationController) {
+        [self _loadAspects];
     }
 }
 
@@ -417,7 +427,8 @@
 
 - (void)pushSubModuleManager:(id <MDModuleManager>)moduleManager animated:(BOOL)animated {
     moduleManager.superModuleManager = self;
-    moduleManager.navigationController = self.navigationController;
+    if (moduleManager.navigationController != self.navigationController)
+        [moduleManager performSelector:@selector(_updateNavigationController:) withObject:self.navigationController];
     UIViewController *vc = moduleManager.rootViewController;
     [self pushViewController:vc animated:animated];
     vc.moduleManager = moduleManager;

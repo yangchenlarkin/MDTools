@@ -16,7 +16,11 @@
 - (UIViewController *)generateRootViewController;
 
 
-@property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, readonly) UINavigationController *navigationController;
+
+/*
+ * navigationController如果传空，则会以self.rootViewController为navigationController的rootViewController生成一个navigationController
+ */
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController;
 
 

@@ -80,8 +80,7 @@
 }
 
 - (void)process1 {
-    MDMMImageProcess1 *mm = [[MDMMImageProcess1 alloc] initWithImage:self.imageView.image];
-    mm.navigationController = self.navigationController;
+    MDMMImageProcess1 *mm = [[MDMMImageProcess1 alloc] initWithImage:self.imageView.image navigationController:self.navigationController];
     [self.moduleManager pushSubModuleManager:mm animated:YES];
     __weak typeof(self) _w_self = self;
     __weak typeof(mm) _w_mm = mm;
@@ -95,8 +94,7 @@
 }
 
 - (void)process2 {
-    MDMMImageProcess2 *mm = [[MDMMImageProcess2 alloc] initWithImage:self.imageView.image];
-    mm.navigationController = self.navigationController;
+    MDMMImageProcess2 *mm = [[MDMMImageProcess2 alloc] initWithImage:self.imageView.image navigationController:self.navigationController];
     [self.moduleManager pushSubModuleManager:mm animated:YES];
     __weak typeof(self) _w_self = self;
     __weak typeof(mm) _w_mm = mm;
@@ -110,8 +108,7 @@
 }
 
 - (void)process3 {
-    MDMMImageProcess3 *mm = [[MDMMImageProcess3 alloc] initWithImage:self.imageView.image];
-    mm.navigationController = self.navigationController;
+    MDMMImageProcess3 *mm = [[MDMMImageProcess3 alloc] initWithImage:self.imageView.image navigationController:self.navigationController];
     [self.moduleManager pushSubModuleManager:mm animated:YES];
     __weak typeof(self) _w_self = self;
     __weak typeof(mm) _w_mm = mm;

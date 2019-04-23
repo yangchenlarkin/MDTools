@@ -18,10 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] init];
-    MDMMImageModuleManager *homeModuleManager = [[MDMMImageModuleManager alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:homeModuleManager.rootViewController];
-    homeModuleManager.navigationController = navigationController;
-    self.window.rootViewController = navigationController;
+    MDMMImageModuleManager *homeModuleManager = [[MDMMImageModuleManager alloc] initWithNavigationController:nil];
+    self.window.rootViewController = homeModuleManager.navigationController;
     
     [self.window makeKeyAndVisible];
     return YES;

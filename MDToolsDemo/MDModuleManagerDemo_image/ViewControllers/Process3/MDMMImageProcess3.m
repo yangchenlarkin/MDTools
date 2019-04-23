@@ -21,8 +21,8 @@
 @implementation MDMMImageProcess3
 __ImplementationProtocol__
 
-- (instancetype)initWithImage:(UIImage *)image {
-    if (self = [super init]) {
+- (instancetype)initWithImage:(UIImage *)image navigationController:(UINavigationController *)navigationController {
+    if (self = [self initWithNavigationController:navigationController]) {
         self.originImage = image;
     }
     return self;

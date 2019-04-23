@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MDMMImageProcess1 : NSObject <MDModuleManager>
 
 @property (nonatomic, copy) void (^didFinish)(UIImage *image);
-- (instancetype)initWithImage:(UIImage *)image;
+- (instancetype)initWithImage:(UIImage *)image navigationController:(UINavigationController *)navigationController;
 
 @end
 
