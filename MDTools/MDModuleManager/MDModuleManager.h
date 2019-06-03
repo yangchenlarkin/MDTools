@@ -17,6 +17,12 @@
 - (UIViewController *)generateRootViewController;
 - (void)didLoadNavigationController;
 
+//当前ViewController被当前Module管理，且没有被当前Module的任何子孙Module管理，则当前module状态为appear
+- (void)moduleWillAppear:(BOOL)animated;
+- (void)moduleWillDisappear:(BOOL)animated;
+- (void)moduleDidAppear:(BOOL)animated;
+- (void)moduleDidDisappear:(BOOL)animated;
+
 #pragma mark - public method
 @property (nonatomic, readonly) UINavigationController *navigationController;
 

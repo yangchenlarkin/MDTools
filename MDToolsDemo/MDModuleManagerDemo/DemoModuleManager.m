@@ -16,6 +16,22 @@ __ImplementationProtocol__
     return [[DemoViewController alloc] init];
 }
 
+- (void)moduleWillAppear:(BOOL)animated {
+    NSLog(@"<wil app DemoModuleManager>: %lu", (unsigned long)self.index);
+}
+
+- (void)moduleDidAppear:(BOOL)animated {
+    NSLog(@"<did app DemoModuleManager>: %lu", (unsigned long)self.index);
+}
+
+- (void)moduleWillDisappear:(BOOL)animated {
+    NSLog(@"<wil dis DemoModuleManager>: %lu", (unsigned long)self.index);
+}
+
+- (void)moduleDidDisappear:(BOOL)animated {
+    NSLog(@"<did dis DemoModuleManager>: %lu", (unsigned long)self.index);
+}
+
 - (void)dealloc {
     NSLog(@"<Dealloc DemoModuleManager>: %lu", (unsigned long)self.index);
 }

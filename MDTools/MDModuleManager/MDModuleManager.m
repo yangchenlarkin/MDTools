@@ -12,6 +12,12 @@
 #import "UIViewController+ModuleManager.h"
 #import <Aspects/Aspects.h>
 
+typedef enum : NSUInteger {
+    MDModuleManagerStateDisappear,
+    MDModuleManagerStateAppearing,
+    MDModuleManagerStateDisappearing,
+    MDModuleManagerStateAppear,
+} MDModuleManagerState;
 
 @interface _MVVMViewModuleWeakContainer : NSObject
 
@@ -32,6 +38,74 @@
 @implementationProtocol(MDModuleManager)
 
 #pragma mark - private method
+
+- (void)setAppearState:(MDModuleManagerState)appearState {
+    objc_setAssociatedObject(self, "__appearState", @(appearState), OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (MDModuleManagerState)appearState {
+    return [objc_getAssociatedObject(self, "__appearState") unsignedIntegerValue];
+}
+
+- (void)_viewWillAppearNotification:(NSNotification *)notification {
+    UIViewController *vc = notification.userInfo[@"viewController"];
+    BOOL animated = [notification.userInfo[@"animated"] boolValue];
+    if (self.appearState == MDModuleManagerStateDisappear && vc.moduleManager == self) {
+        NSUInteger count = [self _mutableViewController].count;
+        if (count >= 2) {
+            if ([[[self _mutableViewController][count - 1] object] moduleManager] == [[[self _mutableViewController][count - 2] object] moduleManager]) {
+                return;
+            }
+        }
+        self.appearState = MDModuleManagerStateAppearing;
+        [self moduleWillAppear:animated];
+    }
+}
+
+- (void)_viewDidAppearNotification:(NSNotification *)notification {
+    UIViewController *vc = notification.userInfo[@"viewController"];
+    BOOL animated = [notification.userInfo[@"animated"] boolValue];
+    if (self.appearState == MDModuleManagerStateAppearing && vc.moduleManager == self) {
+        NSUInteger count = [self _mutableViewController].count;
+        if (count >= 2) {
+            if ([[[self _mutableViewController][count - 1] object] moduleManager] == [[[self _mutableViewController][count - 2] object] moduleManager]) {
+                return;
+            }
+        }
+        self.appearState = MDModuleManagerStateAppear;
+        [self moduleDidAppear:animated];
+    }
+}
+
+- (void)_viewWillDisappearNotification:(NSNotification *)notification {
+    UIViewController *vc = notification.userInfo[@"viewController"];
+    BOOL animated = [notification.userInfo[@"animated"] boolValue];
+    if (self.appearState == MDModuleManagerStateAppear && vc.moduleManager == self) {
+        NSUInteger count = [self _mutableViewController].count;
+        if (count >= 2) {
+            if ([[[self _mutableViewController][count - 1] object] moduleManager] == [[[self _mutableViewController][count - 2] object] moduleManager]) {
+                return;
+            }
+        }
+        self.appearState = MDModuleManagerStateDisappearing;
+        [self moduleWillDisappear:animated];
+    }
+}
+
+- (void)_viewDidDisappearNotification:(NSNotification *)notification {
+    UIViewController *vc = notification.userInfo[@"viewController"];
+    BOOL animated = [notification.userInfo[@"animated"] boolValue];
+    if (self.appearState != MDModuleManagerStateDisappear && vc.moduleManager == self) {
+        NSUInteger count = [self _mutableViewController].count;
+        if (count >= 2) {
+            if ([[[self _mutableViewController][count - 1] object] moduleManager] == [[[self _mutableViewController][count - 2] object] moduleManager]) {
+                return;
+            }
+        }
+        self.appearState = MDModuleManagerStateDisappear;
+        [self moduleDidDisappear:animated];
+    }
+}
 
 - (_MVVMViewModuleWeakContainer *)_lastViewControllerContainer {
     _MVVMViewModuleWeakContainer *container = objc_getAssociatedObject(self, "__lastViewControllerContainer");
@@ -119,7 +193,7 @@
                                    token = [self _addAspectToObject:lastViewController withSelector:NSSelectorFromString(@"dealloc") block:^(id<AspectInfo> info) {
                                        [token remove];
                                        typeof(weakSelf) self = weakSelf;
-                                       if (!self._lastViewControllerContainer.object) {
+                                       if (!self.tailViewController) {
                                            self.tailViewController.moduleManager = nil;
                                            [self._mutableViewController removeLastObject];
                                            [self _removeLastViewControllerContainer];
@@ -204,13 +278,21 @@
 - (instancetype)initWithNavigationController:(UINavigationController *)navigationController{
     if (self = [self init]) {
         self.navigationController = navigationController;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_viewWillAppearNotification:) name:@"MDModuleManager_viewWillAppear:" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_viewDidAppearNotification:) name:@"MDModuleManager_viewDidAppear:" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_viewWillDisappearNotification:) name:@"MDModuleManager_viewWillDisappear:" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_viewDidDisappearNotification:) name:@"MDModuleManager_viewDidDisappear:" object:nil];
+        
+        __weak id __weak_self = self;
+        [self aspect_hookSelector:NSSelectorFromString(@"dealloc") withOptions:AspectPositionBefore usingBlock:^{
+            [[NSNotificationCenter defaultCenter] removeObserver:__weak_self];
+        } error:nil];
     }
     return self;
 }
 
 - (UIViewController *)rootViewController {
     if (self._mutableViewController.count == 0) {
-        
         UIViewController *viewController = [self generateRootViewController];
         viewController.moduleManager = self;
         [self._mutableViewController addObject:[_MVVMViewModuleWeakContainer containerWithObject:viewController]];
@@ -281,6 +363,19 @@
     return [[UIViewController alloc] init];
 }
 
+- (void)moduleWillAppear:(BOOL)animated; {
+    
+}
+- (void)moduleWillDisappear:(BOOL)animated; {
+    
+}
+- (void)moduleDidAppear:(BOOL)animated; {
+    
+}
+- (void)moduleDidDisappear:(BOOL)animated; {
+    
+}
+
 - (NSArray<UIViewController *> *)popAllViewControllersAnimated:(BOOL)animated {
     if (!self.navigationController) {
         return nil;
@@ -294,6 +389,7 @@
     for (_MVVMViewModuleWeakContainer *viewControllerValue in self._mutableViewController) {
         [[viewControllerValue object] setModuleManager:nil];
     }
+    [self moduleWillDisappear:animated];
     NSArray *res = self._mutableViewController.copy;
     NSUInteger index = [self.navigationController.viewControllers indexOfObject:self.rootViewController] - 1;
     UIViewController *toViewController = self.navigationController.viewControllers[index];
