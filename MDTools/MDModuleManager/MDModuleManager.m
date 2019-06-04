@@ -19,22 +19,6 @@ typedef enum : NSUInteger {
     MDModuleManagerStateAppear,
 } MDModuleManagerState;
 
-@interface _MVVMViewModuleWeakContainer : NSObject
-
-@property (nonatomic, weak) id object;
-
-@end
-
-@implementation _MVVMViewModuleWeakContainer
-
-+ (_MVVMViewModuleWeakContainer *)containerWithObject:(id)object {
-    _MVVMViewModuleWeakContainer *res = [[_MVVMViewModuleWeakContainer alloc] init];
-    res.object = object;
-    return res;
-}
-
-@end
-
 @implementationProtocol(MDModuleManager)
 
 #pragma mark - private method
@@ -51,9 +35,11 @@ typedef enum : NSUInteger {
     UIViewController *vc = notification.userInfo[@"viewController"];
     BOOL animated = [notification.userInfo[@"animated"] boolValue];
     if (self.appearState == MDModuleManagerStateDisappear && vc.moduleManager == self) {
-        NSUInteger count = [self _mutableViewController].count;
+        NSUInteger count = [self _mutableViewControllers].count;
         if (count >= 2) {
-            if ([[[self _mutableViewController][count - 1] object] moduleManager] == [[[self _mutableViewController][count - 2] object] moduleManager]) {
+            UIViewController *vc_1 = [[self _mutableViewControllers] pointerAtIndex:count - 1];
+            UIViewController *vc_2 = [[self _mutableViewControllers] pointerAtIndex:count - 2];
+            if ([vc_1 moduleManager] == [vc_2 moduleManager]) {
                 return;
             }
         }
@@ -66,9 +52,11 @@ typedef enum : NSUInteger {
     UIViewController *vc = notification.userInfo[@"viewController"];
     BOOL animated = [notification.userInfo[@"animated"] boolValue];
     if (self.appearState == MDModuleManagerStateAppearing && vc.moduleManager == self) {
-        NSUInteger count = [self _mutableViewController].count;
+        NSUInteger count = [self _mutableViewControllers].count;
         if (count >= 2) {
-            if ([[[self _mutableViewController][count - 1] object] moduleManager] == [[[self _mutableViewController][count - 2] object] moduleManager]) {
+            UIViewController *vc_1 = [[self _mutableViewControllers] pointerAtIndex:count - 1];
+            UIViewController *vc_2 = [[self _mutableViewControllers] pointerAtIndex:count - 2];
+            if ([vc_1 moduleManager] == [vc_2 moduleManager]) {
                 return;
             }
         }
@@ -81,9 +69,11 @@ typedef enum : NSUInteger {
     UIViewController *vc = notification.userInfo[@"viewController"];
     BOOL animated = [notification.userInfo[@"animated"] boolValue];
     if (self.appearState == MDModuleManagerStateAppear && vc.moduleManager == self) {
-        NSUInteger count = [self _mutableViewController].count;
+        NSUInteger count = [self _mutableViewControllers].count;
         if (count >= 2) {
-            if ([[[self _mutableViewController][count - 1] object] moduleManager] == [[[self _mutableViewController][count - 2] object] moduleManager]) {
+            UIViewController *vc_1 = [[self _mutableViewControllers] pointerAtIndex:count - 1];
+            UIViewController *vc_2 = [[self _mutableViewControllers] pointerAtIndex:count - 2];
+            if ([vc_1 moduleManager] == [vc_2 moduleManager]) {
                 return;
             }
         }
@@ -96,9 +86,11 @@ typedef enum : NSUInteger {
     UIViewController *vc = notification.userInfo[@"viewController"];
     BOOL animated = [notification.userInfo[@"animated"] boolValue];
     if (self.appearState != MDModuleManagerStateDisappear && vc.moduleManager == self) {
-        NSUInteger count = [self _mutableViewController].count;
+        NSUInteger count = [self _mutableViewControllers].count;
         if (count >= 2) {
-            if ([[[self _mutableViewController][count - 1] object] moduleManager] == [[[self _mutableViewController][count - 2] object] moduleManager]) {
+            UIViewController *vc_1 = [[self _mutableViewControllers] pointerAtIndex:count - 1];
+            UIViewController *vc_2 = [[self _mutableViewControllers] pointerAtIndex:count - 2];
+            if ([vc_1 moduleManager] == [vc_2 moduleManager]) {
                 return;
             }
         }
@@ -107,31 +99,29 @@ typedef enum : NSUInteger {
     }
 }
 
-- (_MVVMViewModuleWeakContainer *)_lastViewControllerContainer {
-    _MVVMViewModuleWeakContainer *container = objc_getAssociatedObject(self, "__lastViewControllerContainer");
-    if (!container) {
-        container = [[_MVVMViewModuleWeakContainer alloc] init];
-        objc_setAssociatedObject(self, "__lastViewControllerContainer", container, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-    return container;
-}
-
-- (void)_removeLastViewControllerContainer {
-    objc_setAssociatedObject(self, "__lastViewControllerContainer", nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSMutableArray *)_mutableViewController {
-    NSMutableArray *mutableViewControllerss = objc_getAssociatedObject(self, "__viewControllers");
+- (NSPointerArray *)_mutableViewControllers {
+    NSPointerArray *mutableViewControllerss = objc_getAssociatedObject(self, "__viewControllers");
     if (!mutableViewControllerss) {
-        mutableViewControllerss = [NSMutableArray array];
+        mutableViewControllerss = [NSPointerArray weakObjectsPointerArray];
         objc_setAssociatedObject(self, "__viewControllers", mutableViewControllerss, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
+    NSLog(@"b:%lu", (unsigned long)[mutableViewControllerss count]);
+    [mutableViewControllerss addPointer:NULL];
+    [mutableViewControllerss compact];
+    NSLog(@"a:%lu", (unsigned long)[mutableViewControllerss count]);
     return mutableViewControllerss;
 }
 
+- (void)_clearViewControllers {
+    objc_setAssociatedObject(self, "__viewControllers", nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (BOOL)_containViewController:(UIViewController *)viewController {
-    for (_MVVMViewModuleWeakContainer *v in self._mutableViewController) {
-        if (v.object == viewController) {
+    if (!viewController) {
+        return NO;
+    }
+    for (UIViewController *vc in self._mutableViewControllers) {
+        if (vc == viewController) {
             return YES;
         }
     }
@@ -150,13 +140,14 @@ typedef enum : NSUInteger {
 }
 
 - (void)_removeViewControllers:(NSArray *)viewControllers {
-    NSMutableArray *array = [NSMutableArray array];
-    [self._mutableViewController enumerateObjectsUsingBlock:^(_MVVMViewModuleWeakContainer *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([viewControllers containsObject:[obj object]]) {
-            [array addObject:obj];
+    for (UIViewController *vc in viewControllers) {
+        for (int i = 0; i < self._mutableViewControllers.count; i++) {
+            if ([self._mutableViewControllers pointerAtIndex:i] == (__bridge void * _Nullable)(vc)) {
+                [self._mutableViewControllers removePointerAtIndex:i];
+                break;
+            }
         }
-    }];
-    [self._mutableViewController removeObjectsInArray:array];
+    }
 }
 
 - (NSMutableArray *)_aspectTokens {
@@ -181,27 +172,7 @@ typedef enum : NSUInteger {
 
 - (void)_loadAspects {
     __weak typeof(self) weakSelf = self;
-    
-    [self _addAspectToObject:self.navigationController
-     withSelector:@selector(popViewControllerAnimated:)
-                           block:^(id<AspectInfo> info) {
-                               typeof(weakSelf) self = weakSelf;
-                               UIViewController *lastViewController = self.navigationController.viewControllers.lastObject;
-                               if (self.tailViewController == lastViewController) {
-                                   self._lastViewControllerContainer.object = self.tailViewController;
-                                   __weak id<AspectToken> token = nil;
-                                   token = [self _addAspectToObject:lastViewController withSelector:NSSelectorFromString(@"dealloc") block:^(id<AspectInfo> info) {
-                                       [token remove];
-                                       typeof(weakSelf) self = weakSelf;
-                                       if (!self.tailViewController) {
-                                           self.tailViewController.moduleManager = nil;
-                                           [self._mutableViewController removeLastObject];
-                                           [self _removeLastViewControllerContainer];
-                                       }
-                                   }];
-                               }
-                           }];
-    
+
     [self _addAspectToObject:self.navigationController
      withSelector:@selector(popToViewController:animated:)
                        block:^(id<AspectInfo> info) {
@@ -215,48 +186,42 @@ typedef enum : NSUInteger {
                            }];
                            [self _removeViewControllers:res];
                        }];
-    
+
     [self _addAspectToObject:self.navigationController
                 withSelector:@selector(popToRootViewControllerAnimated:)
                        block:^(id<AspectInfo> info) {
                            typeof(weakSelf) self = weakSelf;
-                           if (self.rootViewController == self.navigationController.viewControllers.firstObject) {
-                               [self._mutableViewController enumerateObjectsUsingBlock:^(_MVVMViewModuleWeakContainer *viewControllerValue, NSUInteger idx, BOOL * _Nonnull stop) {
-                                   if (idx) {
-                                       [[viewControllerValue object] setModuleManager:nil];
-                                   }
-                               }];
-                               
-                               [self._mutableViewController removeAllObjects];
-                               [self._mutableViewController addObject:[_MVVMViewModuleWeakContainer containerWithObject:self.navigationController.viewControllers.firstObject]];
-                           } else {
-                               for (_MVVMViewModuleWeakContainer *viewControllerValue in self._mutableViewController) {
-                                   [[viewControllerValue object] setModuleManager:nil];
+                           [self _clearViewControllers];
+                           [self.navigationController.viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL * _Nonnull stop) {
+                               if (idx) {
+                                   [vc setModuleManager:nil];
+                               } else {
+                                   [self._mutableViewControllers addPointer:(__bridge void * _Nullable)vc];
                                }
-                               [self._mutableViewController removeAllObjects];
-                           }
+                           }];
+                           
                        }];
-    
+
     [self _addAspectToObject:self.navigationController
                 withSelector:@selector(setViewControllers:)
                            block:^(id<AspectInfo> info) {
                                typeof(weakSelf) self = weakSelf;
-                               [[self _mutableViewController] removeAllObjects];
+                               [self _clearViewControllers];
                                for (UIViewController *vc in [info arguments][0]) {
                                    if ([self _isSuperModuleManagerOfViewController:vc]) {
-                                       [[self _mutableViewController] addObject:[_MVVMViewModuleWeakContainer containerWithObject:vc]];
+                                       [[self _mutableViewControllers] addPointer:(__bridge void * _Nullable)(vc)];
                                    }
                                }
                            }];
-    
+
     [self _addAspectToObject:self.navigationController
                 withSelector:@selector(setViewControllers:animated:)
                            block:^(id<AspectInfo> info) {
                                typeof(weakSelf) self = weakSelf;
-                               [[self _mutableViewController] removeAllObjects];
+                               [self _clearViewControllers];
                                for (UIViewController *vc in [info arguments][0]) {
                                    if ([self _isSuperModuleManagerOfViewController:vc]) {
-                                       [[self _mutableViewController] addObject:[_MVVMViewModuleWeakContainer containerWithObject:vc]];
+                                       [[self _mutableViewControllers] addPointer:(__bridge void * _Nullable)(vc)];
                                    }
                                }
                            }];
@@ -292,34 +257,30 @@ typedef enum : NSUInteger {
 }
 
 - (UIViewController *)rootViewController {
-    if (self._mutableViewController.count == 0) {
+    if (self._mutableViewControllers.count == 0) {
         UIViewController *viewController = [self generateRootViewController];
         viewController.moduleManager = self;
-        [self._mutableViewController addObject:[_MVVMViewModuleWeakContainer containerWithObject:viewController]];
+        [self._mutableViewControllers insertPointer:(__bridge void * _Nullable)(viewController) atIndex:0];
         
         return viewController;
     }
-    return [self._mutableViewController.firstObject object];
+    return [self._mutableViewControllers pointerAtIndex:0];
 }
 
 - (UIViewController *)tailViewController {
-    if (self._mutableViewController.count == 0) {
+    if (self._mutableViewControllers.count == 0) {
         
         UIViewController *viewController = [self generateRootViewController];
         viewController.moduleManager = self;
-        [self._mutableViewController addObject:[_MVVMViewModuleWeakContainer containerWithObject:viewController]];
+        [self._mutableViewControllers insertPointer:(__bridge void * _Nullable)(viewController) atIndex:0];
         
         return viewController;
     }
-    return [self._mutableViewController.lastObject object];
+    return [self._mutableViewControllers pointerAtIndex:self._mutableViewControllers.count - 1];
 }
 
 - (NSArray<UIViewController *> *)viewControllers {
-    NSMutableArray <UIViewController *> *result = [NSMutableArray arrayWithCapacity:self._mutableViewController.count];
-    for (_MVVMViewModuleWeakContainer *c in self._mutableViewController) {
-        [result addObject:c.object];
-    }
-    return result;
+    return [[self _mutableViewControllers] allObjects];
 }
 
 - (UINavigationController *)navigationController {
@@ -380,17 +341,17 @@ typedef enum : NSUInteger {
     if (!self.navigationController) {
         return nil;
     }
-    if (self._mutableViewController.count >= self.navigationController.viewControllers.count) {
+    if (self._mutableViewControllers.count >= self.navigationController.viewControllers.count) {
         return nil;
     }
     if (self.navigationController.viewControllers.lastObject != self.tailViewController) {
         return nil;
     }
-    for (_MVVMViewModuleWeakContainer *viewControllerValue in self._mutableViewController) {
-        [[viewControllerValue object] setModuleManager:nil];
+    for (UIViewController *vc in self._mutableViewControllers) {
+        [vc setModuleManager:nil];
     }
     [self moduleWillDisappear:animated];
-    NSArray *res = self._mutableViewController.copy;
+    NSArray *res = self._mutableViewControllers.allObjects;
     NSUInteger index = [self.navigationController.viewControllers indexOfObject:self.rootViewController] - 1;
     UIViewController *toViewController = self.navigationController.viewControllers[index];
     if (self.superModuleManager) {
@@ -398,12 +359,7 @@ typedef enum : NSUInteger {
     }
     [self.navigationController popToViewController:toViewController animated:animated];
     
-    NSMutableArray *result = [NSMutableArray arrayWithCapacity:res.count];
-    [res enumerateObjectsUsingBlock:^(_MVVMViewModuleWeakContainer *obj, NSUInteger idx, BOOL *stop) {
-        UIViewController *value = obj.object;
-        [result addObject:value];
-    }];
-    return result;
+    return res;
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -413,13 +369,13 @@ typedef enum : NSUInteger {
     if (!self.navigationController) {
         return;
     }
-    if (self._mutableViewController.count > self.navigationController.viewControllers.count) {
+    if (self._mutableViewControllers.count > self.navigationController.viewControllers.count) {
         return;
     }
     if (self.tailViewController != self.navigationController.viewControllers.lastObject) {
         return;
     }
-    [self._mutableViewController addObject:[_MVVMViewModuleWeakContainer containerWithObject:viewController]];
+    [self._mutableViewControllers insertPointer:(__bridge void * _Nullable)(viewController) atIndex:self._mutableViewControllers.count];
     if (self.superModuleManager) {
         [self.superModuleManager pushViewController:viewController animated:animated];
         viewController.moduleManager = self;
@@ -433,7 +389,7 @@ typedef enum : NSUInteger {
     if (!self.navigationController) {
         return;
     }
-    if (self._mutableViewController.count > self.navigationController.viewControllers.count) {
+    if (self._mutableViewControllers.count > self.navigationController.viewControllers.count) {
         return;
     }
     if (self.tailViewController != self.navigationController.viewControllers.lastObject) {
@@ -456,7 +412,7 @@ typedef enum : NSUInteger {
     if (![self _containViewController:viewController]) {
         return nil;
     }
-    if (self._mutableViewController.count > self.navigationController.viewControllers.count) {
+    if (self._mutableViewControllers.count > self.navigationController.viewControllers.count) {
         return nil;
     }
     if (self.tailViewController != self.navigationController.viewControllers.lastObject) {
@@ -483,11 +439,13 @@ typedef enum : NSUInteger {
     if (![self.navigationController.viewControllers containsObject:viewController]) {
         return YES;
     }
-    for (_MVVMViewModuleWeakContainer *c in [self _mutableViewController]) {
-        if (c.object == viewController) {
+    for (int i = 0; i < [self _mutableViewControllers].count; i++) {
+        UIViewController *vc = [[self _mutableViewControllers] pointerAtIndex:i];
+        if (vc == viewController) {
             NSMutableArray *vcs = self.navigationController.viewControllers.mutableCopy;
             [vcs removeObject:viewController];
             self.navigationController.viewControllers = vcs;
+            [[self _mutableViewControllers] removePointerAtIndex:i];
             return YES;
         }
     }
@@ -503,9 +461,11 @@ typedef enum : NSUInteger {
         if (![self.navigationController.viewControllers containsObject:viewController]) {
             continue;
         }
-        for (_MVVMViewModuleWeakContainer *c in [self _mutableViewController]) {
-            if (c.object == viewController) {
+        for (NSUInteger i = [self _mutableViewControllers].count - 1; i < [self _mutableViewControllers].count && i >= 0 ; i--) {
+            UIViewController *vc = [[self _mutableViewControllers] pointerAtIndex:i];
+            if (vc == viewController) {
                 [vcs removeObject:viewController];
+                [[self _mutableViewControllers] removePointerAtIndex:i];
             }
         }
     }
