@@ -105,10 +105,8 @@ typedef enum : NSUInteger {
         mutableViewControllerss = [NSPointerArray weakObjectsPointerArray];
         objc_setAssociatedObject(self, "__viewControllers", mutableViewControllerss, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
-    NSLog(@"b:%lu", (unsigned long)[mutableViewControllerss count]);
     [mutableViewControllerss addPointer:NULL];
     [mutableViewControllerss compact];
-    NSLog(@"a:%lu", (unsigned long)[mutableViewControllerss count]);
     return mutableViewControllerss;
 }
 
@@ -442,10 +440,10 @@ typedef enum : NSUInteger {
     for (int i = 0; i < [self _mutableViewControllers].count; i++) {
         UIViewController *vc = [[self _mutableViewControllers] pointerAtIndex:i];
         if (vc == viewController) {
+            [[self _mutableViewControllers] removePointerAtIndex:i];
             NSMutableArray *vcs = self.navigationController.viewControllers.mutableCopy;
             [vcs removeObject:viewController];
             self.navigationController.viewControllers = vcs;
-            [[self _mutableViewControllers] removePointerAtIndex:i];
             return YES;
         }
     }
