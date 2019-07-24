@@ -27,15 +27,23 @@
     if (!listener) {
         return;
     }
-    [self.listeners addObject:listener];
+    @synchronized (self) {
+        [self.listeners addObject:listener];
+    }
 }
 
 - (void)removeListener:(NSObject *)listener {
-    [self.listeners removeObject:listener];
+    @synchronized (self) {
+        [self.listeners removeObject:listener];
+    }
 }
 
 - (void)performAction:(MDListenerAction)action {
-    for (id object in self.listeners.copy) {
+    NSArray *allListeners = nil;
+    @synchronized (self) {
+         allListeners = self.listeners.allObjects.copy;
+    }
+    for (id object in allListeners) {
         if (action) {
             action(object);
         }
@@ -43,7 +51,7 @@
 }
 
 - (NSUInteger)listenerCount {
-    return self.listeners.count;
+    return self.listeners.allObjects.count;
 }
 
 @end
