@@ -9,12 +9,7 @@
 #import "MDProtocolImplementation.h"
 #import <objc/runtime.h>
 
-void _append_default_implement_method_to_class_implementation_class(Class class) {
-    Class metaClass = object_getClass(class);
-    
-    unsigned protocolCount;
-    Protocol * __unsafe_unretained *protocols = class_copyProtocolList(class, &protocolCount);
-    
+void __append_default_implement_method_to_class_implementation_class(Protocol * __unsafe_unretained *protocols, unsigned protocolCount, Class metaClass, Class class) {
     for (int j = 0; j < protocolCount; j ++) {
         Protocol *protocol = protocols[j];
         NSString *tempClassName = [NSString stringWithFormat:@"_%s_Implementation", protocol_getName(protocol)];
@@ -42,8 +37,19 @@ void _append_default_implement_method_to_class_implementation_class(Class class)
             
             tempClass = class_getSuperclass(tempClass);
         }
+
+        unsigned _protocolCount;
+        Protocol * __unsafe_unretained *_protocols = protocol_copyProtocolList(protocol, &_protocolCount);
+        __append_default_implement_method_to_class_implementation_class(_protocols, _protocolCount, metaClass, class);
     }
-    free(protocols);
 }
 
+void _append_default_implement_method_to_class_implementation_class(Class class) {
+    Class metaClass = object_getClass(class);
+    
+    unsigned protocolCount;
+    Protocol * __unsafe_unretained *protocols = class_copyProtocolList(class, &protocolCount);
+    __append_default_implement_method_to_class_implementation_class(protocols, protocolCount, metaClass, class);
+    free(protocols);
+}
 
