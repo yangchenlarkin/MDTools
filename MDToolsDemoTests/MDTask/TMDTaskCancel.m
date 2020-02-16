@@ -20,7 +20,7 @@
 
 - (void)setUp {
     [super setUp];
-    self.task1_succes_2sec = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
+    self.task1_succes_2sec = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"t1 success");
             finish(task, nil, @"t1 result");
@@ -30,7 +30,7 @@
                                  NSLog(@"t1 canceled");
                              }];
     
-    self.task2_fail_1sec = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
+    self.task2_fail_1sec = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"t2 fail");
             finish(task, MDTaskDefaultError, @"t2 failed");

@@ -32,6 +32,28 @@ NSError *MDTaskDefaultError;
     MDTaskDefaultError = [NSError errorWithDomain:@"MDTools.MDTask.DefaultError" code:0 userInfo:nil];
 }
 
++ (MDTaskInputProxy)nilObjectInputProxy {
+    static MDTaskInputProxy res = NULL;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        res = ^id(NSString *taskId) {
+            return nil;
+        };
+    });
+    return res;
+}
+
++ (MDTaskInputProxy)nilObjectFinishResultProxy {
+    static MDTaskInputProxy res = NULL;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        res = ^id(NSString *taskId) {
+            return nil;
+        };
+    });
+    return res;
+}
+
 + (NSMutableSet *)runningTasks {
     static NSMutableSet *tasks = nil;
     static dispatch_once_t onceToken;
@@ -132,6 +154,17 @@ NSError *MDTaskDefaultError;
 }
 
 - (BOOL)runWithFinishResult:(MDTaskFinishResult)finishResult {
+    return [self runWithInput:nil finishResult:finishResult];
+}
+
+- (BOOL)runWithInput:(id)input
+        finishResult:(MDTaskFinishResult)finishResult {
+    return [self runWithLastInputProxy:NULL input:input finishResult:finishResult];
+}
+
+- (BOOL)runWithLastInputProxy:(MDTaskInputProxy)inputProxy
+                        input:(id)input
+                 finishResult:(MDTaskFinishResult)finishResult {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[MDTask runningTasks] addObject:self];
     });
@@ -157,9 +190,22 @@ NSError *MDTaskDefaultError;
     if (self.taskBlock) {
         self.tryCount++;
         __weak typeof(self) selfWeak = self;
-        self.taskBlock(self, ^(__kindof MDTask *task, NSError *error, id result) {
+        MDTaskInputProxy curInputProxy = [MDTask nilObjectInputProxy];
+        if (input || (inputProxy && inputProxy != [MDTask nilObjectInputProxy])) {
+            curInputProxy = ^id (NSString *taskId) {
+                typeof(selfWeak) self = selfWeak;
+                if ([taskId isEqualToString:self.taskId] || !taskId) {
+                    return input;
+                }
+                if (inputProxy) {
+                    return inputProxy(taskId);
+                }
+                return nil;
+            };
+        }
+        self.taskBlock(self, curInputProxy, ^(__kindof MDTask *task, NSError *error, id result) {
             if (!result) {
-                self.finishResult(task, error, NULL);
+                self.finishResult(task, error, [MDTask nilObjectFinishResultProxy]);
                 return;
             }
             typeof(selfWeak) self = selfWeak;
@@ -241,7 +287,9 @@ NSError *MDTaskDefaultError;
     return NO;
 }
 
-- (BOOL)runWithFinishResult:(MDTaskFinishResult)finishResult {
+- (BOOL)runWithLastInputProxy:(MDTaskInputProxy)inputProxy
+                        input:(id)input
+                 finishResult:(MDTaskFinishResult)finishResult {
     @synchronized (self) {
         if (self.isRunning) {
             return NO;
@@ -260,15 +308,39 @@ NSError *MDTaskDefaultError;
     }
     
     __weak typeof(self) selfWeak = self;
-    NSMutableDictionary <NSString *, id> *results = [NSMutableDictionary dictionaryWithCapacity:self.tasks.count];
+    MDTaskInputProxy curInputProxy = (input || inputProxy) ? ^id (NSString *taskId) {
+        typeof(selfWeak) self = selfWeak;
+        if ([taskId isEqualToString:self.taskId] || !taskId) {
+            return input;
+        }
+        
+        if (inputProxy) {
+            return inputProxy(taskId);
+        }
+        return nil;
+    } : NULL;
+    NSMutableDictionary <NSString *, id> *results = [NSMutableDictionary dictionaryWithCapacity:self.tasks.count + 1];
+    NSMutableDictionary <NSString *, id> *groupResult = [NSMutableDictionary dictionaryWithCapacity:self.tasks.count];
+    results[self.taskId] = ^id(NSString *taskId) {
+        typeof(selfWeak) self = selfWeak;
+        if ([taskId isEqualToString:self.taskId] || !taskId) {
+            return groupResult;
+        }
+        return nil;
+    };
     [self.tasks enumerateObjectsUsingBlock:^(__kindof MDTask * _Nonnull obj, BOOL * _Nonnull stop) {
-        [obj runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        [obj runWithLastInputProxy:curInputProxy
+                             input:input
+                      finishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
             typeof(selfWeak) self = selfWeak;
             if (!self.isRunning) {
                 return;
             }
-            if (resultProxy) {
+            if (resultProxy != [MDTask nilObjectFinishResultProxy]) {
                 results[task.taskId] = resultProxy;
+            }
+            if (resultProxy(task.taskId)) {
+                groupResult[task.taskId] = resultProxy(task.taskId);
             }
             if (error) {
                 [self finishRunningWithError:error results:results];
@@ -284,7 +356,8 @@ NSError *MDTaskDefaultError;
     return YES;
 }
 
-- (void)finishRunningWithError:(NSError *)error results:(NSDictionary <NSString *, id> *)results {
+- (void)finishRunningWithError:(NSError *)error
+                       results:(NSDictionary <NSString *, MDTaskResultProxy> *)results {
     self.finished = 0;
     self.isRunning = NO;
     if (error) {
@@ -297,7 +370,7 @@ NSError *MDTaskDefaultError;
         [self.tasks removeAllObjects];
     }
     
-    self.finishResult(self, error, results.count == 0 ? NULL : ^id (NSString *taskId) {
+    self.finishResult(self, error, results.count == 0 ? [MDTask nilObjectFinishResultProxy] : ^id (NSString *taskId) {
         for (NSString *key in results) {
             MDTaskResultProxy resultProxy = results[key];
             id res = resultProxy(taskId);
@@ -394,7 +467,9 @@ NSError *MDTaskDefaultError;
     return NO;
 }
 
-- (BOOL)runWithFinishResult:(MDTaskFinishResult)finishResult {
+- (BOOL)runWithLastInputProxy:(MDTaskInputProxy)inputProxy
+                        input:(id)input
+                 finishResult:(MDTaskFinishResult)finishResult {
     @synchronized (self) {
         if (self.isRunning) {
             return NO;
@@ -407,35 +482,87 @@ NSError *MDTaskDefaultError;
     self.isRunning = YES;
     self.finishResult = finishResult;
     
-    NSMutableDictionary <NSString *, MDTaskResultProxy> *results = [NSMutableDictionary dictionaryWithCapacity:self.tasks.count];
-    [self runNextWithCurrentResults:results];
+    __weak typeof(self) selfWeak = self;
+    
+    NSMutableDictionary <NSString *, MDTaskResultProxy> *results = [NSMutableDictionary dictionaryWithCapacity:self.tasks.count + 1];
+    NSMutableDictionary <NSString *, id> *listResults = [NSMutableDictionary dictionaryWithCapacity:self.tasks.count];
+
+    results[self.taskId] = ^id(NSString *taskId) {
+        typeof(selfWeak) self = selfWeak;
+        if (taskId == self.taskId) {
+            return listResults;
+        }
+        return nil;
+    };
+    
+    MDTaskInputProxy curInputProxy = [MDTask nilObjectInputProxy];
+    if (input || (inputProxy && inputProxy != [MDTask nilObjectInputProxy])) {
+        curInputProxy = ^id (NSString *taskId) {
+            typeof(selfWeak) self = selfWeak;
+            if ([taskId isEqualToString:self.taskId] || !taskId) {
+                return input;
+            }
+            if (inputProxy) {
+                return inputProxy(taskId);
+            }
+            return nil;
+        };
+    }
+    [self runNextWithLastInputProxy:curInputProxy input:input currentResults:results listResults:listResults];
     
     return YES;
 }
 
-- (void)runNextWithCurrentResults:(NSMutableDictionary <NSString *, MDTaskResultProxy> *)results {
+- (void)runNextWithLastInputProxy:(MDTaskInputProxy)inputProxy
+                            input:(id)input
+                    currentResults:(NSMutableDictionary <NSString *, MDTaskResultProxy> *)results
+                       listResults:(NSMutableDictionary <NSString *, id> *)listResults {
     if (self.runningTaskIndex >= self.tasks.count) {
-        [self finishRunningWithError:nil results:results];
+        [self finishRunningWithError:nil results:results listResults:listResults];
         return;
     }
     
     MDTask *t = self.tasks[self.runningTaskIndex];
     __weak typeof(self) selfWeak = self;
-    [t runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+    
+    MDTaskInputProxy curInputProxy = [MDTask nilObjectInputProxy];
+    if (input || (inputProxy && inputProxy != [MDTask nilObjectInputProxy])) {
+        curInputProxy = ^id (NSString *taskId) {
+            typeof(selfWeak) self = selfWeak;
+            if ([taskId isEqualToString:self.taskId] || !taskId) {
+                return input;
+            }
+            if (inputProxy) {
+                return inputProxy(taskId);
+            }
+            return nil;
+        };
+    }
+    [t runWithLastInputProxy:curInputProxy
+                       input:input
+                finishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
         typeof(selfWeak) self = selfWeak;
-        if (resultProxy) {
+        if (resultProxy != [MDTask nilObjectFinishResultProxy]) {
             results[task.taskId] = resultProxy;
         }
+        if (resultProxy(task.taskId)) {
+            listResults[task.taskId] = resultProxy(nil);
+        }
         if (error) {
-            [self finishRunningWithError:error results:results];
+            [self finishRunningWithError:error results:results listResults:listResults];
             return;
         }
         self.runningTaskIndex++;
-        [self runNextWithCurrentResults:results];
+        [self runNextWithLastInputProxy:curInputProxy
+                                  input:resultProxy ? resultProxy(nil) : nil
+                         currentResults:results
+                            listResults:listResults];
     }];
 }
 
-- (void)finishRunningWithError:(NSError *)error results:(NSMutableDictionary <NSString *, MDTaskResultProxy> *)results {
+- (void)finishRunningWithError:(NSError *)error
+                       results:(NSMutableDictionary <NSString *, MDTaskResultProxy> *)results
+                   listResults:(NSMutableDictionary <NSString *, id> *)listResults {
     self.runningTaskIndex = 0;
     self.isRunning = NO;
     if (error) {
@@ -448,7 +575,12 @@ NSError *MDTaskDefaultError;
         [self.tasks removeAllObjects];
     }
     if (self.finishResult) {
-        self.finishResult(self, error, results.count == 0 ? NULL : ^id (NSString *taskId) {
+        typeof(self) selfWeak = self;
+        self.finishResult(self, error, results.count == 0 ? [MDTask nilObjectFinishResultProxy] : ^id (NSString *taskId) {
+            typeof(selfWeak) self = selfWeak;
+            if ([self.taskId isEqualToString:taskId] || !taskId) {
+                return listResults;
+            }
             for (NSString *key in results) {
                 MDTaskResultProxy resultProxy = results[key];
                 id res = resultProxy(taskId);

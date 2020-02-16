@@ -19,7 +19,7 @@
                              taskIdForIndex:(MDArrayObjectTaskId)taskIdForIndex {
     MDTaskGroup *taskGroup = [MDTaskGroup taskGroup];
     [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [taskGroup addTaskBlock:^(MDTask *task, MDTaskFinish finish) {
+        [taskGroup addTaskBlock:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
             objectTask(task, finish, obj, idx);
         }
                          taskId:taskIdForIndex ? taskIdForIndex(obj, idx) : nil];
@@ -36,7 +36,7 @@
                            taskIdForIndex:(MDArrayObjectTaskId)taskIdForIndex {
     MDTaskList *taskList = [MDTaskList taskList];
     for (NSUInteger idx = 0; idx < self.count; idx++) {
-        [taskList addTaskBlock:^(MDTask *task, MDTaskFinish finish) {
+        [taskList addTaskBlock:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
             objectTask(task, finish, self[idx], idx);
         }
                         taskId:taskIdForIndex ? taskIdForIndex(self[idx], idx) : nil];

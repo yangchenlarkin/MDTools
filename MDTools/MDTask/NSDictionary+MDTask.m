@@ -18,7 +18,7 @@
                                         taskIdForKey:(MDDictionaryTaskIdForKey _Nullable)taskIdForKey {
     MDTaskGroup *taskGroup = [MDTaskGroup taskGroup];
     [self enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [taskGroup addTaskBlock:^(MDTask *task, MDTaskFinish finish) {
+        [taskGroup addTaskBlock:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
             objectTask(task, finish, key, obj);
         }
                          taskId:taskIdForKey ? taskIdForKey(key, obj) : nil];
@@ -35,7 +35,7 @@
     NSArray *allKeys = self.allKeys;
     MDTaskList *taskList = [MDTaskList taskList];
     for (NSUInteger idx = 0; idx < self.count; idx++) {
-        [taskList addTaskBlock:^(MDTask *task, MDTaskFinish finish) {
+        [taskList addTaskBlock:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
             objectTask(task, finish, allKeys[idx], self[allKeys[idx]], idx);
         }
         taskId:taskIdForKey ? taskIdForKey(allKeys[idx], self[allKeys[idx]]) : nil];

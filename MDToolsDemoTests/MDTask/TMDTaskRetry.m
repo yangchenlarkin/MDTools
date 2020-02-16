@@ -28,7 +28,7 @@
 - (void)testRetryTaskFail {
     XCTestExpectation *expectation = [self expectationWithDescription:@""];
     
-    MDTask *task1 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
+    MDTask *task1 = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         NSLog(@"task1");
         finish(task, MDTaskDefaultError, @"t1 result");
     }
@@ -41,7 +41,7 @@
                      }
                  }];
     
-    MDTask *task2 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
+    MDTask *task2 = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         NSLog(@"task2");
         finish(task, nil, @"t2 result");
     }
@@ -67,7 +67,7 @@
 - (void)testRetryTaskSuccess {
     XCTestExpectation *expectation = [self expectationWithDescription:@""];
     static int count = 3;
-    MDTask *task1 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
+    MDTask *task1 = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         NSLog(@"task1");
         finish(task, --count == 0 ? nil : MDTaskDefaultError, @"t1 result");
     }
@@ -80,7 +80,7 @@
                      }
                  }];
     
-    MDTask *task2 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
+    MDTask *task2 = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         NSLog(@"task2");
         finish(task, nil, @"t2 result");
     }

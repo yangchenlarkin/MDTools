@@ -14,12 +14,14 @@ extern NSError *MDTaskDefaultError;
 
 typedef void (^MDTaskFinish)(__kindof MDTask *task, NSError *error, id result);
 typedef void (^MDTaskCancelBlock)(MDTask *task);
-typedef void (^MDTaskBlock)(MDTask *task, MDTaskFinish finish);
+typedef id (^MDTaskInputProxy)(NSString *taskId);
+
+//inputProxy(nil) == inputProxy(task.taskId)
+typedef void (^MDTaskBlock)(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish);
 typedef void (^MDTaskFailBlock)(MDTask *task, NSUInteger tryCount, void (^retry)(BOOL retry));
 
 typedef id (^MDTaskResultProxy)(NSString *taskId);
-
-//result(nil) == result(task.taskId)
+//resultProxy(nil) == resultProxy(task.taskId)
 typedef void (^MDTaskFinishResult)(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy);
 
 @interface MDTask : NSObject
@@ -44,6 +46,8 @@ typedef void (^MDTaskFinishResult)(__kindof MDTask *task, NSError *error, MDTask
    taskFailBlock:(MDTaskFailBlock)fail
       withTaskId:(NSString *)taskId;
 
+- (BOOL)runWithInput:(id)input
+        finishResult:(MDTaskFinishResult)finishResult;
 - (BOOL)runWithFinishResult:(MDTaskFinishResult)finishResult;
 
 @end
