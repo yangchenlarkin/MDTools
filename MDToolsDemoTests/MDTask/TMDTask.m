@@ -31,6 +31,9 @@
         });
     }
                    withTaskId:@"1"];
+    self.task1.resultGenerator = ^id(id originResult) {
+        return [originResult stringByAppendingString:@"(add sufix)"];
+    };
     
     self.task2 = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         NSLog(@"running t2 with input: %@", inputProxy(nil));
@@ -40,6 +43,9 @@
         });
     }
                    withTaskId:@"2"];
+    self.task2.resultGenerator = ^id(id originResult) {
+        return [originResult stringByAppendingString:@"(add sufix)"];
+    };
     
     self.task3 = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         NSLog(@"running t3 with input: %@", inputProxy(nil));
@@ -49,6 +55,9 @@
         });
     }
                    withTaskId:@"3"];
+    self.task3.resultGenerator = ^id(id originResult) {
+        return [originResult stringByAppendingString:@"(add sufix)"];
+    };
     
     self.task4 = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         NSLog(@"running t4 with input: %@", inputProxy(nil));
@@ -58,6 +67,9 @@
         });
     }
                    withTaskId:@"4"];
+    self.task4.resultGenerator = ^id(id originResult) {
+        return [originResult stringByAppendingString:@"(add sufix)"];
+    };
     
     self.task5 = [MDTask task:^(MDTask *task, MDTaskInputProxy inputProxy, MDTaskFinish finish) {
         NSLog(@"running t5 with input: %@", inputProxy(nil));
@@ -67,6 +79,9 @@
         });
     }
                    withTaskId:@"5"];
+    self.task5.resultGenerator = ^id(id originResult) {
+        return [originResult stringByAppendingString:@"(add sufix)"];
+    };
 }
 
 - (void)tearDown {
@@ -104,6 +119,9 @@
         NSLog(@"task grop result is: %@", resultProxy(nil));
         [expectation fulfill];
     }];
+    tg.resultGenerator = ^id(id originResult) {
+        return [NSString stringWithFormat:@"%@(add sufix)", originResult];
+    };
     [self waitForExpectationsWithTimeout:3 handler:nil];
 }
 
@@ -124,6 +142,9 @@
         NSLog(@"task list result is: %@", resultProxy(nil));
         [expectation fulfill];
     }];
+    tl.resultGenerator = ^id(id originResult) {
+        return [NSString stringWithFormat:@"%@(add sufix)", originResult];
+    };
     [self waitForExpectationsWithTimeout:6 handler:nil];
 }
 

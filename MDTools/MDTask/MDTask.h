@@ -27,6 +27,7 @@ typedef void (^MDTaskFinishResult)(__kindof MDTask *task, NSError *error, MDTask
 @interface MDTask : NSObject
 
 @property (nonatomic, readonly) NSString *taskId;//TODO: 需要保证唯一性
+@property (nonatomic, copy) id (^resultGenerator)(id originResult);
 
 //需要在适当的时候手动调用finish()
 

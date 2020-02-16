@@ -171,6 +171,15 @@ NSError *MDTaskDefaultError;
     __weak typeof(self) selfWeak = self;
     self.finishResult = ^(MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
         typeof(selfWeak) self = selfWeak;
+        if (self.resultGenerator) {
+            resultProxy = ^id(NSString *taskId) {
+                typeof(selfWeak) self = selfWeak;
+                if ([self.taskId isEqualToString:taskId] || !taskId) {
+                    return self.resultGenerator(resultProxy(nil));
+                }
+                return resultProxy(taskId);
+            };
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             [[MDTask runningTasks] removeObject:self];
         });
@@ -324,6 +333,9 @@ NSError *MDTaskDefaultError;
     results[self.taskId] = ^id(NSString *taskId) {
         typeof(selfWeak) self = selfWeak;
         if ([taskId isEqualToString:self.taskId] || !taskId) {
+            if (self.resultGenerator) {
+                return self.resultGenerator(groupResult);
+            }
             return groupResult;
         }
         return nil;
@@ -489,7 +501,10 @@ NSError *MDTaskDefaultError;
 
     results[self.taskId] = ^id(NSString *taskId) {
         typeof(selfWeak) self = selfWeak;
-        if (taskId == self.taskId) {
+        if ([self.taskId isEqualToString:taskId] || !taskId) {
+            if (self.resultGenerator) {
+                return self.resultGenerator(listResults);
+            }
             return listResults;
         }
         return nil;
@@ -579,6 +594,9 @@ NSError *MDTaskDefaultError;
         self.finishResult(self, error, results.count == 0 ? [MDTask nilObjectFinishResultProxy] : ^id (NSString *taskId) {
             typeof(selfWeak) self = selfWeak;
             if ([self.taskId isEqualToString:taskId] || !taskId) {
+                if (self.resultGenerator) {
+                    return self.resultGenerator(listResults);
+                }
                 return listResults;
             }
             for (NSString *key in results) {
