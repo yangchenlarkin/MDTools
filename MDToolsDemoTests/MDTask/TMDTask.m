@@ -26,37 +26,42 @@
     self.task1 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"t1 finish");
-            finish(task, YES);
+            finish(task, nil, @"t1 result");
         });
-    }];
+    }
+                   withTaskId:@"1"];
     
     self.task2 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"t2 finish");
-            finish(task, YES);
+            finish(task, nil, @"t2 result");
         });
-    }];
+    }
+                   withTaskId:@"2"];
     
     self.task3 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"t3 finish");
-            finish(task, YES);
+            finish(task, nil, @"t3 result");
         });
-    }];
+    }
+                   withTaskId:@"3"];
     
     self.task4 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"t4 finish");
-            finish(task, YES);
+            finish(task, nil, @"t4 result");
         });
-    }];
+    }
+                   withTaskId:@"4"];
     
     self.task5 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"t5 finish");
-            finish(task, YES);
+            finish(task, nil, @"t5 result");
         });
-    }];
+    }
+                   withTaskId:@"5"];
 }
 
 - (void)tearDown {
@@ -71,7 +76,10 @@
 - (void)testTask {
     XCTestExpectation *expectation = [self expectationWithDescription:@""];
     
-    [self.task1 runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [self.task1 runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        NSLog(@"task1 result is: %@", resultProxy(self.task1.taskId));
+        NSLog(@"task2 result is: %@", resultProxy(self.task2.taskId));
+        NSLog(@"task3 result is: %@", resultProxy(self.task3.taskId));
         [expectation fulfill];
     }];
     
@@ -84,7 +92,10 @@
     MDTaskGroup *tg = [MDTaskGroup taskGroup];
     [tg addTask:self.task1];
     [tg addTask:self.task2];
-    [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [tg runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        NSLog(@"task1 result is: %@", resultProxy(self.task1.taskId));
+        NSLog(@"task2 result is: %@", resultProxy(self.task2.taskId));
+        NSLog(@"task3 result is: %@", resultProxy(self.task3.taskId));
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:3 handler:nil];
@@ -96,7 +107,10 @@
     MDTaskList *tl = [MDTaskList taskList];
     [tl addTask:self.task1];
     [tl addTask:self.task2];
-    [tl runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [tl runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        NSLog(@"task1 result is: %@", resultProxy(self.task1.taskId));
+        NSLog(@"task2 result is: %@", resultProxy(self.task2.taskId));
+        NSLog(@"task3 result is: %@", resultProxy(self.task3.taskId));
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:3 handler:nil];
@@ -111,10 +125,13 @@
     
     MDTaskGroup *tg = [MDTaskGroup taskGroupWithTasks:tl, self.task3, nil];
     
-    [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [tg runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        NSLog(@"task1 result is: %@", resultProxy(self.task1.taskId));
+        NSLog(@"task2 result is: %@", resultProxy(self.task2.taskId));
+        NSLog(@"task3 result is: %@", resultProxy(self.task3.taskId));
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:3 handler:nil];
+    [self waitForExpectationsWithTimeout:3000 handler:nil];
 }
 
 - (void)testTaskGroupInTaskList {
@@ -125,7 +142,10 @@
     [tg addTask:self.task2];
     
     MDTaskList *tl = [MDTaskList taskListWithTasks:tg, self.task3, nil];
-    [tl runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [tl runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        NSLog(@"task1 result is: %@", resultProxy(self.task1.taskId));
+        NSLog(@"task2 result is: %@", resultProxy(self.task2.taskId));
+        NSLog(@"task3 result is: %@", resultProxy(self.task3.taskId));
         [expectation fulfill];
     }];
     

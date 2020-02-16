@@ -42,15 +42,17 @@
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:array.count];
     MDTaskGroup *tg = [array md_taskGroupWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, NSString *obj, NSUInteger idx) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            NSLog(@"task: %@", obj);
-            [result addObject:[obj stringByAppendingString:[@(idx) stringValue]]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                finish(task, YES);
-            });
+            finish(task, nil, [obj stringByAppendingString:[@(idx) stringValue]]);
         });
+    }
+                                         taskIdForIndex:^NSString * _Nullable(id  _Nonnull obj, NSUInteger idx) {
+        return [@(idx) stringValue];
     }];
     
-    [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [tg runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        for (NSUInteger i = 0; i < array.count; i++) {
+            [result addObject:resultProxy([@(i) stringValue])];
+        }
         NSLog(@"%@", result);
         [expectation fulfill];
     }];
@@ -77,13 +79,11 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
             NSLog(@"task: %@", obj);
             [result addObject:[obj stringByAppendingString:[@(idx) stringValue]]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                finish(task, YES);
-            });
+            finish(task, nil, nil);
         });
     }];
     
-    [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [tg runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
         NSLog(@"%@", result);
         [expectation fulfill];
     }];
@@ -105,18 +105,18 @@
                                  @"8": @"_8",
                                  @"9": @"_9",
                                  };
-    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithCapacity:dictionary.count];
-    MDTaskGroup *tg = [dictionary md_taskGroupWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, NSString * _Nonnull key, NSString *  _Nonnull obj) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            result[key] = [key stringByAppendingString:obj];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                finish(task, YES);
-            });
-        });
-    }];
     
-    [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
-        NSLog(@"%@", result);
+    [[dictionary md_taskGroupWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, NSString * _Nonnull key, NSString *  _Nonnull obj) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            finish(task, nil, [key stringByAppendingString:obj]);
+        });
+    }
+                               taskIdForKey:^NSString * _Nullable(id  _Nonnull key, id  _Nonnull obj) {
+        return key;
+    }] runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        for (id key in dictionary) {
+            NSLog(@"{result for key [%@] is [%@]", key, resultProxy(key));
+        }
         [expectation fulfill];
     }];
     
@@ -137,18 +137,18 @@
                                  @"8": @"_8",
                                  @"9": @"_9",
                                  };
-    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithCapacity:dictionary.count];
-    MDTaskList *tg = [dictionary md_taskListWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, NSString * _Nonnull key, NSString *  _Nonnull obj, NSUInteger idx) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            result[key] = [key stringByAppendingString:obj];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                finish(task, YES);
-            });
-        });
-    }];
     
-    [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
-        NSLog(@"%@", result);
+    [[dictionary md_taskListWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, NSString * _Nonnull key, NSString *  _Nonnull obj, NSUInteger idx) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            finish(task, nil, [key stringByAppendingString:obj]);
+        });
+    }
+                              taskIdForKey:^NSString * _Nullable(id  _Nonnull key, id  _Nonnull obj) {
+        return key;
+    }] runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        for (id key in dictionary) {
+            NSLog(@"{result for key [%@] is [%@]", key, resultProxy(key));
+        }
         [expectation fulfill];
     }];
     
@@ -168,19 +168,18 @@
                   @"7",
                   @"8",
                   @"9", nil];
-    NSMutableSet *result = [NSMutableSet setWithCapacity:set.count];
     
-    MDTaskGroup *tg = [set md_taskGroupWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, NSString * _Nonnull obj) {
+    [[set md_taskGroupWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, NSString * _Nonnull obj) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [result addObject:[obj stringByAppendingString:@"hello"]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                finish(task, YES);
-            });
+            finish(task, nil, [obj stringByAppendingString:@"_hello"]);
         });
-    }];
-    
-    [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
-        NSLog(@"%@", result);
+    }
+                     taskIdForObject:^NSString * _Nullable(id  _Nonnull obj) {
+        return obj;
+    }] runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        for (id obj in set) {
+            NSLog(@"result for obj [%@] is [%@]", obj, resultProxy(obj));
+        }
         [expectation fulfill];
     }];
     
@@ -200,17 +199,18 @@
                   @"7",
                   @"8",
                   @"9", nil];
-    NSMutableSet *result = [NSMutableSet setWithCapacity:set.count];
-    MDTaskList *tl = [set md_taskListWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, id  _Nonnull obj, NSUInteger idx) {
+    
+    [[set md_taskListWithObjectTask:^(MDTask * _Nonnull task, MDTaskFinish  _Nonnull finish, id  _Nonnull obj, NSUInteger idx) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [result addObject:[obj stringByAppendingString:[@(idx) stringValue]]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                finish(task, YES);
-            });
+            finish(task, nil, [obj stringByAppendingString:[@(idx) stringValue]]);
         });
-    }];
-    [tl runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
-        NSLog(@"%@", result);
+    }
+                 taskIdForIdxObject:^NSString * _Nullable(id  _Nonnull obj, NSUInteger idx) {
+        return obj;
+    }] runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        for (id obj in set) {
+            NSLog(@"result for obj [%@] is [%@]", obj, resultProxy(obj));
+        }
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:3 handler:nil];

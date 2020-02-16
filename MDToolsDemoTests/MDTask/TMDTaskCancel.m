@@ -23,7 +23,7 @@
     self.task1_succes_2sec = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"t1 success");
-            finish(task, YES);
+            finish(task, nil, @"t1 result");
         });
     }
                              cancelBlock:^(MDTask *task) {
@@ -33,7 +33,7 @@
     self.task2_fail_1sec = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             NSLog(@"t2 fail");
-            finish(task, NO);
+            finish(task, MDTaskDefaultError, @"t2 failed");
         });
     }];
 }
@@ -51,7 +51,12 @@
     [tg addTask:self.task2_fail_1sec];
     [tg addTask:self.task1_succes_2sec];
     
-    [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [tg runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        NSLog(@"task1 result is: %@", resultProxy(self.task1_succes_2sec.taskId));
+        NSLog(@"task2 result is: %@", resultProxy(self.task2_fail_1sec.taskId));
+        if (error) {
+            NSLog(@"failed: %@", error);
+        }
         [expectation fulfill];
     }];
     
@@ -65,7 +70,12 @@
     [tl addTask:self.task2_fail_1sec];
     [tl addTask:self.task1_succes_2sec];
     
-    [tl runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [tl runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        NSLog(@"task1 result is: %@", resultProxy(self.task1_succes_2sec.taskId));
+        NSLog(@"task2 result is: %@", resultProxy(self.task2_fail_1sec.taskId));
+        if (error) {
+            NSLog(@"failed: %@", error);
+        }
         [expectation fulfill];
     }];
     

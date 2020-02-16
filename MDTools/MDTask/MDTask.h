@@ -8,22 +8,43 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSError *MDTaskDefaultError;
+
 @class MDTask;
 
-typedef void (^MDTaskFinish)(__kindof MDTask *task, BOOL succeed);
+typedef void (^MDTaskFinish)(__kindof MDTask *task, NSError *error, id result);
 typedef void (^MDTaskCancelBlock)(MDTask *task);
 typedef void (^MDTaskBlock)(MDTask *task, MDTaskFinish finish);
 typedef void (^MDTaskFailBlock)(MDTask *task, NSUInteger tryCount, void (^retry)(BOOL retry));
 
+typedef id (^MDTaskResultProxy)(NSString *taskId);
+
+//result(nil) == result(task.taskId)
+typedef void (^MDTaskFinishResult)(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy);
+
 @interface MDTask : NSObject
 
-@property (nonatomic, copy) NSString *tag;
+@property (nonatomic, readonly) NSString *taskId;//TODO: 需要保证唯一性
 
 //需要在适当的时候手动调用finish()
+
 + (MDTask *)task:(MDTaskBlock)taskBlock;
-+ (MDTask *)task:(MDTaskBlock)taskBlock cancelBlock:(MDTaskCancelBlock)cancel;
-+ (MDTask *)task:(MDTaskBlock)taskBlock cancelBlock:(MDTaskCancelBlock)cancel taskFailBlock:(MDTaskFailBlock)fail;
-- (BOOL)runWithFinish:(MDTaskFinish)finish;
++ (MDTask *)task:(MDTaskBlock)taskBlock
+     cancelBlock:(MDTaskCancelBlock)cancel;
++ (MDTask *)task:(MDTaskBlock)taskBlock
+     cancelBlock:(MDTaskCancelBlock)cancel taskFailBlock:(MDTaskFailBlock)fail;
+
++ (MDTask *)task:(MDTaskBlock)taskBlock
+      withTaskId:(NSString *)taskId;
++ (MDTask *)task:(MDTaskBlock)taskBlock
+     cancelBlock:(MDTaskCancelBlock)cancel
+      withTaskId:(NSString *)taskId;
++ (MDTask *)task:(MDTaskBlock)taskBlock
+     cancelBlock:(MDTaskCancelBlock)cancel
+   taskFailBlock:(MDTaskFailBlock)fail
+      withTaskId:(NSString *)taskId;
+
+- (BOOL)runWithFinishResult:(MDTaskFinishResult)finishResult;
 
 @end
 
@@ -36,8 +57,11 @@ typedef void (^MDTaskFailBlock)(MDTask *task, NSUInteger tryCount, void (^retry)
 
 + (MDTaskGroup *)taskGroup;
 + (MDTaskGroup *)taskGroupWithTasks:(MDTask *)task, ...;
-- (BOOL)addTaskBlock:(MDTaskBlock)taskBlock;
 - (BOOL)addTask:(__kindof MDTask *)task;
+
+- (BOOL)addTaskBlock:(MDTaskBlock)taskBlock;
+- (BOOL)addTaskBlock:(MDTaskBlock)taskBlock
+              taskId:(NSString *)taskId;
 /*
  if the tasks are running, they will be removed after the running is finished
  */
@@ -56,6 +80,8 @@ typedef void (^MDTaskFailBlock)(MDTask *task, NSUInteger tryCount, void (^retry)
 + (MDTaskList *)taskListWithTasks:(MDTask *)task, ...;
 - (BOOL)addTaskBlock:(MDTaskBlock)taskBlock;
 - (BOOL)addTask:(__kindof MDTask *)task;
+- (BOOL)addTaskBlock:(MDTaskBlock)taskBlock
+              taskId:(NSString *)taskId;
 /*
  if the tasks are running, they will be removed after the running is finished
  */

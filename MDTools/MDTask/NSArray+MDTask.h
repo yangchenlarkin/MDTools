@@ -9,11 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "MDTask.h"
 
-typedef void(^MArrayObjectTaskBlock)(MDTask * _Nonnull task, MDTaskFinish _Nonnull finish, id _Nonnull obj, NSUInteger idx);
+typedef void(^MDArrayObjectTaskBlock)(MDTask * _Nonnull task, MDTaskFinish _Nonnull finish, id _Nonnull obj, NSUInteger idx);
+typedef NSString *_Nullable(^MDArrayObjectTaskId)(id _Nonnull obj, NSUInteger idx);
 
 @interface NSArray (MDTask)
 
-- (MDTaskGroup *_Nullable)md_taskGroupWithObjectTask:(MArrayObjectTaskBlock _Nonnull)objectTask;
-- (MDTaskList *_Nonnull)md_taskListWithObjectTask:(MArrayObjectTaskBlock _Nonnull)objectTask;
+- (MDTaskGroup *_Nullable)md_taskGroupWithObjectTask:(MDArrayObjectTaskBlock _Nonnull)objectTask;
+- (MDTaskGroup *_Nullable)md_taskGroupWithObjectTask:(MDArrayObjectTaskBlock _Nonnull)objectTask
+                                      taskIdForIndex:(MDArrayObjectTaskId _Nullable )taskIdForIndex;
+
+- (MDTaskList *_Nonnull)md_taskListWithObjectTask:(MDArrayObjectTaskBlock _Nonnull)objectTask;
+- (MDTaskList *_Nonnull)md_taskListWithObjectTask:(MDArrayObjectTaskBlock _Nonnull)objectTask
+                                   taskIdForIndex:(MDArrayObjectTaskId _Nullable )taskIdForIndex;
 
 @end

@@ -10,22 +10,36 @@
 
 @implementation NSArray (MDTask)
 
-- (MDTaskGroup *)md_taskGroupWithObjectTask:(MArrayObjectTaskBlock)objectTask {
+- (MDTaskGroup *)md_taskGroupWithObjectTask:(MDArrayObjectTaskBlock)objectTask {
+    return [self md_taskGroupWithObjectTask:objectTask
+                             taskIdForIndex:NULL];
+}
+
+- (MDTaskGroup *)md_taskGroupWithObjectTask:(MDArrayObjectTaskBlock)objectTask
+                             taskIdForIndex:(MDArrayObjectTaskId)taskIdForIndex {
     MDTaskGroup *taskGroup = [MDTaskGroup taskGroup];
     [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [taskGroup addTaskBlock:^(MDTask *task, MDTaskFinish finish) {
             objectTask(task, finish, obj, idx);
-        }];
+        }
+                         taskId:taskIdForIndex ? taskIdForIndex(obj, idx) : nil];
     }];
     return taskGroup;
 }
 
-- (MDTaskList *)md_taskListWithObjectTask:(MArrayObjectTaskBlock)objectTask {
+- (MDTaskList *)md_taskListWithObjectTask:(MDArrayObjectTaskBlock)objectTask {
+    return [self md_taskListWithObjectTask:objectTask
+                            taskIdForIndex:NULL];
+}
+
+- (MDTaskList *)md_taskListWithObjectTask:(MDArrayObjectTaskBlock)objectTask
+                           taskIdForIndex:(MDArrayObjectTaskId)taskIdForIndex {
     MDTaskList *taskList = [MDTaskList taskList];
     for (NSUInteger idx = 0; idx < self.count; idx++) {
         [taskList addTaskBlock:^(MDTask *task, MDTaskFinish finish) {
             objectTask(task, finish, self[idx], idx);
-        }];
+        }
+                        taskId:taskIdForIndex ? taskIdForIndex(self[idx], idx) : nil];
     }
     return taskList;
 }

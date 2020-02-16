@@ -25,19 +25,16 @@
     [super tearDown];
 }
 
-- (void)testRetryTask {
+- (void)testRetryTaskFail {
     XCTestExpectation *expectation = [self expectationWithDescription:@""];
-    
-    __block BOOL result = YES;
     
     MDTask *task1 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
         NSLog(@"task1");
-        result = !result;
-        finish(task, result);
+        finish(task, MDTaskDefaultError, @"t1 result");
     }
                    cancelBlock:NULL
                  taskFailBlock:^(MDTask *task, NSUInteger tryCount, void (^retry)(BOOL retry)) {
-                     if (tryCount > 1) {
+                     if (tryCount > 3) {
                          retry(NO);
                      } else {
                          retry(YES);
@@ -46,13 +43,61 @@
     
     MDTask *task2 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
         NSLog(@"task2");
-        finish(task, YES);
+        finish(task, nil, @"t2 result");
+    }
+                     cancelBlock:^(MDTask *task) {
+        NSLog(@"task2 canceled");
     }];
     
-    MDTaskGroup *tg = [MDTaskGroup taskGroup];
-    [tg addTask:task1];
-    [tg addTask:task2];
-    [tg runWithFinish:^(__kindof MDTask *task, BOOL succeed) {
+    [[MDTaskList taskListWithTasks:task1, task2, nil] runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        if (error) {
+            NSLog(@"fail: %@", error);
+            NSLog(@"task1 result is: %@", resultProxy(task1.taskId));
+            NSLog(@"task2 result is: %@", resultProxy(task2.taskId));
+        } else {
+            NSLog(@"success");
+            NSLog(@"task1 result is: %@", resultProxy(task1.taskId));
+            NSLog(@"task2 result is: %@", resultProxy(task2.taskId));
+        }
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:3 handler:nil];
+}
+
+- (void)testRetryTaskSuccess {
+    XCTestExpectation *expectation = [self expectationWithDescription:@""];
+    static int count = 3;
+    MDTask *task1 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
+        NSLog(@"task1");
+        finish(task, --count == 0 ? nil : MDTaskDefaultError, @"t1 result");
+    }
+                   cancelBlock:NULL
+                 taskFailBlock:^(MDTask *task, NSUInteger tryCount, void (^retry)(BOOL retry)) {
+                     if (tryCount > 5) {
+                         retry(NO);
+                     } else {
+                         retry(YES);
+                     }
+                 }];
+    
+    MDTask *task2 = [MDTask task:^(MDTask *task, MDTaskFinish finish) {
+        NSLog(@"task2");
+        finish(task, nil, @"t2 result");
+    }
+                     cancelBlock:^(MDTask *task) {
+        NSLog(@"task2 canceled");
+    }];
+    
+    [[MDTaskList taskListWithTasks:task1, task2, nil] runWithFinishResult:^(__kindof MDTask *task, NSError *error, MDTaskResultProxy resultProxy) {
+        if (error) {
+            NSLog(@"fail: %@", error);
+            NSLog(@"task1 result is: %@", resultProxy(task1.taskId));
+            NSLog(@"task2 result is: %@", resultProxy(task2.taskId));
+        } else {
+            NSLog(@"success");
+            NSLog(@"task1 result is: %@", resultProxy(task1.taskId));
+            NSLog(@"task2 result is: %@", resultProxy(task2.taskId));
+        }
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:3 handler:nil];
