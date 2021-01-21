@@ -56,9 +56,9 @@ __SHARED_INSTANCE__(MDGCDTimer)
     
     NSMutableDictionary *timers = [self timersFromContainer:container];
     if (timers[timerID]) {
-        dispatch_source_cancel((__bridge dispatch_source_t _Nonnull)(timers[timerID]));
+        dispatch_source_cancel((timers[timerID]));
     }
-    timers[timerID] = timer;
+    timers[timerID] = (timer);
     
     return timerID;
 }
@@ -70,7 +70,7 @@ __SHARED_INSTANCE__(MDGCDTimer)
     }
     NSMutableDictionary *timers = [self timersFromContainer:container];
     if (timers[timerID]) {
-        dispatch_source_cancel(timers[timerID]);
+        dispatch_source_cancel((timers[timerID]));
         return timerID;
     }
     return nil;

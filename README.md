@@ -22,7 +22,7 @@ pod 'MDTools'
 
 ## Author
 
-Larkin, chen.yang@allride.ai
+Larkin, yangchenlarkin@gmail.com
 
 ## License
 

@@ -1,6 +1,0 @@
-framework module MDTools {
-  umbrella header "MDTools-umbrella.h"
-
-  export *
-  module * { export * }
-}

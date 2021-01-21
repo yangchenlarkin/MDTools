@@ -25,6 +25,7 @@ TODO: Add long description of the pod here.
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Larkin' => 'yangchenlarkin@gmail.com' }
+  s.platform      = :ios, "11.0"
   s.source           = { :git => 'git@github.com:yangchenlarkin/MDTools.git', :tag => s.version }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
@@ -75,6 +76,7 @@ TODO: Add long description of the pod here.
           b.dependency "Aspects"
           b.dependency "MBProgressHUD", "~>1.1.0"
           b.dependency "MDTools/MDCommonDefines"
+          b.dependency "MDTools/MDListener"
       end
   end
 
@@ -100,7 +102,7 @@ TODO: Add long description of the pod here.
 
   s.subspec 'MDUtils' do |a|
       a.name = "MDUtils"
-      a.source_files = 'MDTools/Classes/Utils/**/*'
+      a.source_files = 'MDTools/Classes/MDUtils/**/*'
       a.dependency 'YYCategories', '~> 1.0.4'
   end
 
