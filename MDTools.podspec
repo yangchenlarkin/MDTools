@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MDTools'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of MDTools.'
+  s.version          = '0.2.0'
+  s.summary          = 'Tools for Objcetive-C.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,22 +21,91 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/Larkin/MDTools'
+  s.homepage         = 'https://github.com/yangchenlarkin/MDTools'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Larkin' => 'chen.yang@allride.ai' }
-  s.source           = { :git => 'https://github.com/Larkin/MDTools.git', :tag => s.version.to_s }
+  s.author           = { 'Larkin' => 'yangchenlarkin@gmail.com' }
+  s.source           = { :git => 'git@github.com:yangchenlarkin/MDTools.git', :tag => s.version }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
-
-  s.source_files = 'MDTools/Classes/**/*'
+  s.framework     = "Foundation"
   
-  # s.resource_bundles = {
-  #   'MDTools' => ['MDTools/Assets/*.png']
-  # }
+  s.subspec 'MDListener' do |a|
+    a.name          = "MDListener"
+    a.source_files  = "MDTools/Classes/MDListener/*.{h,m}"
+  end
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.subspec 'MDTask' do |a|
+    a.name         = "MDTask"
+    a.source_files = "MDTools/Classes/MDTask/*.{h,m}"
+  end
+
+  s.subspec 'MDProtocolImplementation' do |a|
+    a.name         = "MDProtocolImplementation"
+    a.source_files = "MDTools/Classes/MDProtocolImplementation/*.{h,m}"
+  end
+
+  s.subspec 'MDModuleManager' do |a|
+    a.name         = "MDModuleManager"
+    a.source_files = "MDTools/Classes/MDModuleManager/*.{h,m}"
+    a.dependency 'MDTools/MDProtocolImplementation'
+    a.dependency 'Aspects', '~> 1.4.1'
+  end
+  
+  s.subspec 'MDCommonDefines' do |a|
+      a.name          = "MDCommonDefines"
+      a.source_files  = "MDTools/Classes/MDCommonDefines/**/*"
+  end
+
+  s.subspec 'MDObjectCacher' do |a|
+      a.name = "MDObjectCacher"
+      a.source_files = "MDTools/Classes/MDObjectCacher/**/*"
+      a.dependency "MDTools/MDCommonDefines"
+  end
+
+  s.subspec 'MDUI' do |a|
+      a.name = 'MDUI'
+      a.subspec 'MDLockSlider' do |b|
+          b.name          = "MDLockSlider"
+          b.source_files  = "MDTools/Classes/MDUI/MDLockSlider/**/*"
+      end
+      a.subspec 'MDUtils' do |b|
+          b.name = "MDUtils"
+          b.source_files = "MDTools/Classes/MDUI/MDUtils/**/*"
+          b.dependency "Aspects"
+          b.dependency "MBProgressHUD", "~>1.1.0"
+          b.dependency "MDTools/MDCommonDefines"
+      end
+  end
+
+  s.subspec 'MDGCDTimer' do |a|
+      a.name          = "MDGCDTimer"
+      a.source_files  = "MDTools/Classes/MDGCDTimer/**/*"
+      a.dependency "MDTools/MDCommonDefines"
+  end
+
+  s.subspec 'MDRedisClient' do |a|
+      a.name          = "MDRedisClient"
+      a.source_files  = "MDTools/Classes/MDRedisClient/**/*"
+      a.dependency "MDTools/MDCommonDefines"
+      a.dependency "hiredis"
+  end
+
+  s.subspec 'MDFBRetainCycleDetector' do |a|
+      a.name          = "MDFBRetainCycleDetector"
+      a.source_files  = "MDTools/Classes/MDFBRetainCycleDetector/**/*"
+      a.dependency "FBAllocationTracker"
+      a.dependency "FBRetainCycleDetector"
+  end
+
+  s.subspec 'MDUtils' do |a|
+      a.name = "MDUtils"
+      a.source_files = 'MDTools/Classes/Utils/**/*'
+      a.dependency 'YYCategories', '~> 1.0.4'
+  end
+
+  s.subspec 'MDKeyValueMemoryCache' do |a|
+      a.name = "MDKeyValueMemoryCache"
+      a.source_files = 'MDTools/Classes/MDKeyValueMemoryCache/**/*'
+  end
 end
