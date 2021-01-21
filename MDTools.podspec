@@ -26,7 +26,7 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Larkin' => 'yangchenlarkin@gmail.com' }
   s.platform      = :ios, "11.0"
-  s.source           = { :git => 'git@github.com:yangchenlarkin/MDTools.git', :tag => s.version }
+  s.source           = { :git => 'https://github.com/yangchenlarkin/MDTools.git', :tag => s.version }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.framework     = "Foundation"
