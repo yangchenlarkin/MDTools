@@ -7,12 +7,19 @@
 //
 
 #import "MDAppDelegate.h"
+#import <MDTools/MDCommonDefines.h>
 
 @implementation MDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    onExit {
+        
+    };
+    onExitAt(a) {
+        
+    };
     return YES;
 }
 

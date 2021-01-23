@@ -45,4 +45,12 @@
 
 #define MDLogMethod NSLog(@"%s",__FUNCTION__)
 
+static void md_blockCleanUp(__strong void(^*block)(void)) {
+    (*block)();
+}
+#define onExitAt(__BLOCK_NAME__) \
+    __strong void(^__BLOCK_NAME__)(void) __attribute__((cleanup(md_blockCleanUp), unused)) = ^
+
+#define onExit onExitAt(_md_block_name_)
+
 #endif /* MDCodeSyntacticSugar_h */
