@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MDTools'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'Tools for Objcetive-C.'
 
 # This description is used to generate tags and improve search results.
@@ -105,9 +105,15 @@ TODO: Add long description of the pod here.
       a.source_files = 'MDTools/Classes/MDUtils/**/*'
       a.dependency 'YYCategories', '~> 1.0.4'
   end
-
-  s.subspec 'MDKeyValueMemoryCache' do |a|
-      a.name = "MDKeyValueMemoryCache"
-      a.source_files = 'MDTools/Classes/MDKeyValueMemoryCache/**/*'
+  
+  s.subspec 'MDKeyValueCache' do |a|
+      a.name = "MDKeyValueCache"
+      a.source_files = 'MDTools/Classes/MDKeyValueCache/**/*'
+      a.dependency "MDTools/MDLock"
+  end
+  
+  s.subspec 'MDLock' do |a|
+      a.name = "MDLock"
+      a.source_files = 'MDTools/Classes/MDLock/**/*'
   end
 end
