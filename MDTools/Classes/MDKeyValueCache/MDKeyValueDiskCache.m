@@ -7,6 +7,7 @@
 
 #import "MDKeyValueDiskCache.h"
 #import "MDGCDRWLock.h"
+#import <YYCategories/NSString+YYAdd.h>
 
 @interface MDKeyValueDiskCache ()
 
@@ -53,9 +54,7 @@
         }
         object = self.o2d(object);
     }
-    if (![[key substringToIndex:0] isEqualToString:@"/"]) {
-        key = [@"/" stringByAppendingString:key];
-    }
+    key = [@"/" stringByAppendingString:key.md5String];
     NSString *path = [self _getOrCreatePathForKey:key];
     [self.lock doWriteWithSync:YES task:^{
         [object writeToFile:path atomically:YES];
@@ -64,9 +63,7 @@
 }
 
 - (id)objectForKey:(NSString *)key; {
-    if (![[key substringToIndex:0] isEqualToString:@"/"]) {
-        key = [@"/" stringByAppendingString:key];
-    }
+    key = [@"/" stringByAppendingString:key.md5String];
     __block NSData *res = nil;
     [self.lock doReadWithSync:YES task:^{
         res = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@%@", self.rootPath, key]]];
