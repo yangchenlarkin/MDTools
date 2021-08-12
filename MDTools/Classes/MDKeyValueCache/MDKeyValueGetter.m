@@ -29,7 +29,7 @@
     return res;
 }
 
-- (void)getObjectForKey:(NSString *)key callback:(MDKeyValueGetterResult)callback; {
+- (void)getObjectForKey:(NSString *)key forceGetData:(BOOL)forceGetData callback:(MDKeyValueGetterResult)callback; {
     if (!callback) {
         return;
     }
@@ -49,6 +49,10 @@
     if (res) {
         [self.memoryCache cacheObject:res forKey:key];
         callback(key, res, nil);
+        return;
+    }
+    if (!forceGetData) {
+        callback(key, nil, nil);
         return;
     }
     @synchronized (self.callbacks) {

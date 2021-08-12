@@ -26,7 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (MDKeyValueGetter *)getterWithCacheRootPath:(NSString *)rootPath getterBlock:(MDKeyValueGetterBlock)getter;
 
-- (void)getObjectForKey:(NSString *)key callback:(MDKeyValueGetterResult)callback;
+//首先从缓存取数据，如果缓存有数据则直接返回；若缓存没有数据，如果forceGetData为NO，则返回空数据，否则调用getter获取数据，返回后缓存；
+- (void)getObjectForKey:(NSString *)key forceGetData:(BOOL)forceGetData callback:(MDKeyValueGetterResult)callback;
 - (void)clear;
 
 @end
