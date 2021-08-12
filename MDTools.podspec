@@ -110,6 +110,7 @@ TODO: Add long description of the pod here.
       a.name = "MDKeyValueCache"
       a.source_files = 'MDTools/Classes/MDKeyValueCache/**/*'
       a.dependency "MDTools/MDLock"
+      a.dependency "MDTools/MDCommonDefines"
   end
   
   s.subspec 'MDLock' do |a|

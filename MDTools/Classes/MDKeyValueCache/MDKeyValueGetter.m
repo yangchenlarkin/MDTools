@@ -6,7 +6,7 @@
 //
 
 #import "MDKeyValueGetter.h"
-#import "MDARC.h"
+#import "MDCommonDefines.h"
 
 @interface MDKeyValueGetter ()
 
