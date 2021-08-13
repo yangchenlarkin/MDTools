@@ -111,6 +111,7 @@ TODO: Add long description of the pod here.
       a.source_files = 'MDTools/Classes/MDKeyValueCache/**/*'
       a.dependency "MDTools/MDLock"
       a.dependency "MDTools/MDCommonDefines"
+      a.dependency 'YYCategories', '~> 1.0.4'
   end
   
   s.subspec 'MDLock' do |a|
