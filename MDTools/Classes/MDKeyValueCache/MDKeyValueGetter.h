@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 //在本地磁盘存储object的时候，需要将object转成NSObject。如果object本身就是NSData类型的，可以不用给o2d和d2o赋值；
 @property (nonatomic, copy) MDKeyValueDiskCache_o2d o2d;
 @property (nonatomic, copy) MDKeyValueDiskCache_d2o d2o;
+@property (nonatomic, readonly) MDKeyValueMemoryCache *memoryCache;
+@property (nonatomic, readonly) MDKeyValueDiskCache *diskCache;
 
 + (instancetype)alloc __attribute__((unavailable("alloc not available, call [MDKeyValueDiskCache cacheWithRootPath:] instead")));
 - (instancetype)init __attribute__((unavailable("init not available, call [MDKeyValueDiskCache cacheWithRootPath:] instead")));
