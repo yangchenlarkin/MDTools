@@ -17,41 +17,37 @@
 
 @implementation MDViewController
 
+
+- (NSString *)_rootPath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachesDir = [paths objectAtIndex:0];
+    return [cachesDir stringByAppendingString:@"/HMIIncarAsserts"];
+}
+
+- (NSString *)_getOrCreatePathForKey:(NSString *)package {
+    NSString *path = [[self _rootPath] stringByAppendingFormat:@"/%@", package];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDir = NO;
+    BOOL existed = [fileManager fileExistsAtPath:path isDirectory:&isDir];
+    NSError *error = nil;
+    if (!isDir || !existed) {
+        [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&error];
+    }
+    if (error) {
+        return nil;
+    }
+    return path;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *cachesDir = [paths objectAtIndex:0];
-    NSString *rootPath = [cachesDir stringByAppendingString:@"/HMIIncarAsserts"];
+    MDKeyValueDiskCache *c = [MDKeyValueDiskCache cacheWithRootPath:[self _getOrCreatePathForKey:@"test"]];
     
-    self.getter = [MDKeyValueGetter getterWithCacheRootPath:rootPath getterBlock:^(NSString * _Nullable key, MDKeyValueGetterResult getterResult) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            getterResult(key, key, nil);
-        });
-    }];
-    self.getter.d2o = ^id _Nullable(NSData * _Nullable data) {
-        return [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    };
-    self.getter.o2d = ^NSData * _Nullable(NSString *object) {
-        return [[NSData alloc] initWithBase64EncodedString:object options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    };
-    
-    
-    for (int i = 0; i < 100; i++) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [self.getter getObjectForKey:[@(i) stringValue] callback:^(NSString * _Nullable key, id  _Nullable object, NSError * _Nullable error) {
-                NSLog(@"1>>>>>%@", object);
-            }];
-        });
-    }
-    for (int i = 0; i < 100; i++) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [self.getter getObjectForKey:[@(i) stringValue] callback:^(NSString * _Nullable key, id  _Nullable object, NSError * _Nullable error) {
-                NSLog(@"2>>>>>%@", object);
-            }];
-        });
-    }
+    [c cacheObject:[@"1" dataUsingEncoding:kCFStringEncodingUTF8] forKey:@"1"];
+    NSString * res = [c cachePathForKey:@"1"];
+    NSLog(res);
 }
 
 - (void)didReceiveMemoryWarning

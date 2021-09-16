@@ -28,6 +28,13 @@
     return res;
 }
 
+- (NSString *)cachePathForKey:(NSString *)key {
+    if (self.rootPath.length == 0) {
+        return nil;
+    }
+    return [NSString stringWithFormat:@"%@/%@", self.rootPath, key.md5String];
+}
+
 - (NSString *)_getOrCreatePathForKey:(NSString *)key {
     __block NSString *res = nil;
     [self.lock doWriteWithSync:YES task:^{

@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 //清空rootPath
 - (void)clear;
 
+- (NSString *)cachePathForKey:(NSString *)key;
+
 @end
 
 NS_ASSUME_NONNULL_END
