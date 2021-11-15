@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'MDTools'
-  s.version          = '0.2.6'
+  s.version          = '0.3.0'
   s.summary          = 'Tools for Objcetive-C.'
 
 # This description is used to generate tags and improve search results.
@@ -91,13 +91,6 @@ TODO: Add long description of the pod here.
       a.source_files  = "MDTools/Classes/MDRedisClient/**/*"
       a.dependency "MDTools/MDCommonDefines"
       a.dependency "hiredis"
-  end
-
-  s.subspec 'MDFBRetainCycleDetector' do |a|
-      a.name          = "MDFBRetainCycleDetector"
-      a.source_files  = "MDTools/Classes/MDFBRetainCycleDetector/**/*"
-      a.dependency "FBAllocationTracker"
-      a.dependency "FBRetainCycleDetector"
   end
 
   s.subspec 'MDUtils' do |a|
